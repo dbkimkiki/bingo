@@ -1,14 +1,4 @@
-import * as THREE from 'https://unpkg.com/three@0.119.1/build/three.module.js';
-import { OrbitControls } from 'https://unpkg.com/three@0.119.1/examples/jsm/controls/OrbitControls.js';
-import { GLTFLoader } from 'https://unpkg.com/three@0.119.1/examples/jsm/loaders/GLTFLoader.js';
-import { RGBELoader } from 'https://unpkg.com/three@0.119.1/examples/jsm/loaders/RGBELoader.js';
-import Stats from 'https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js';
 
-var container, controls, threejsElement;
-var camera, scene, threejsRenderer;
-let mercuryObject;
-var stats;
-var showStats = false;
 
 const canvas = document.getElementById('bingocanvas');
 let curVideo = null;
@@ -19,17 +9,13 @@ let previewAlpha = 0.6;
 let isDark = true;
 let textOnTopLandscape = true;
 
-let bingoMatched = false;
-let bingoFadeOutFrames = 150;
-let spriteDestroyed = false;
-let itemsDestroyed = false;
-let endPhase = 0;
-let radioFadeInFrames = 300;
-let waitRedirectFrames = 150;
+
+
 
 let restoreImage = true;
+let restorePlayable = true;
 let disableUnclickable = false;
-let playVideoInBingoBox = true;
+let playVideoInBingoBox = false;
 let loadedVideos = 0;
 
 let strokeWidth = 1;
@@ -118,7 +104,7 @@ let videoEndTimeArray = [
   0, 0, 0, 0, 1, 0
 ];
 let graphicsArray = [];
-let useHighlight = true;
+let useHighlight = false; //outline playable
 
 let beforeX = 0;
 let beforeY = 0;
@@ -487,7 +473,7 @@ function setup() {
         }
         else
         {
-          videoArray[k] =  new PIXI.Sprite(PIXI.Texture.from("videos/"+str+".mp4"));
+          videoArray[k] =  new PIXI.Sprite(PIXI.Texture.from("videos/"+str+"_mid.mp4"));
         }
 
         bingoBoxVideoArray[k] = new PIXI.Sprite(PIXI.Texture.from("videos/"+str+"_low.mp4"));
@@ -688,7 +674,7 @@ function setup() {
   }
 
   function onClick(p) {
-    if(bingoMatched) return;
+
     //console.log("This before: "+this.zIndex);
     //console.log('Image '+k+' is clicked');
     if(toggled == false && inAnimation == false)
@@ -877,7 +863,7 @@ function setup() {
 
 
 function resize(){
-  //if(bingoMatched) return;
+
   if(inAnimation||isLoaded==false)
   {
     pendingResize = true;
@@ -1030,8 +1016,7 @@ function resize(){
   {
     xLoc[i] = xOffset + (rectLength*(i%6)/6)+rectLength/12;
     yLoc[i] = yOffset + (rectLength*parseInt(i/6)/6)+rectLength/12;
-    if(!spriteDestroyed)
-    {
+
       //let i = bingoArray[k];
       
       spriteArray[i].x= xLoc[i];
@@ -1039,40 +1024,38 @@ function resize(){
       spriteArray[i].width = rectLength/6 - 2*strokeWidth;
       spriteArray[i].height = rectLength/6 - 2*strokeWidth;
       spriteArray[i].zIndex = 0;
-    }
+    
     
 
     
-    if(!itemsDestroyed)
+
+    if(usePreview)
     {
-      if(usePreview)
-      {
-        //graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
-        previewSpriteArray[i].x= xLoc[i];
-        previewSpriteArray[i].y= yLoc[i];
-        previewSpriteArray[i].width = rectLength/6 - 2*strokeWidth;
-        previewSpriteArray[i].height = rectLength/6 - 2*strokeWidth;
-        previewSpriteArray[i].zIndex = -0.8;
-        //spriteArray[i].interactive = true;
+      //graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+      previewSpriteArray[i].x= xLoc[i];
+      previewSpriteArray[i].y= yLoc[i];
+      previewSpriteArray[i].width = rectLength/6 - 2*strokeWidth;
+      previewSpriteArray[i].height = rectLength/6 - 2*strokeWidth;
+      previewSpriteArray[i].zIndex = -0.8;
+      //spriteArray[i].interactive = true;
 
-      }
-      else
-      {
-        graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
-      }
-      
-
-      textArray[i].x = xLoc[i];
-      textArray[i].y = yLoc[i];
-      textArray[i].style = textStyle;
-      textArray[i].zIndex = -0.5;
     }
+    else
+    {
+      graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+    }
+    
+
+    textArray[i].x = xLoc[i];
+    textArray[i].y = yLoc[i];
+    textArray[i].style = textStyle;
+    textArray[i].zIndex = -0.5;
+
     
 
     if(playableArray[i])
     {
-      if(!spriteDestroyed)
-      {
+
         videoArray[i].x = xOffset;
         videoArray[i].y = yOffset;
         videoArray[i].width = rectLength;
@@ -1081,7 +1064,7 @@ function resize(){
         videoArray[i].texture.baseTexture.resource.source.pause();
         //videoLoaded[i] = false;
         videoArray[i].alpha=0;
-      }
+      
       
       document.getElementById('bingo-loading').style.display = 'none';
 
@@ -1116,8 +1099,7 @@ function resize(){
   }
   graphics.endFill();
 
-  if(!spriteDestroyed)
-  {
+
     if(spriteArray[0]!=null)
     {
       decreaseScale = spriteArray[0].scale.x;
@@ -1149,7 +1131,7 @@ function resize(){
       { 
         spriteArray[i].alpha = 0.0;
 
-        if(!playableArray[i])
+        if(!playableArray[i]||restorePlayable)
         {
           textArray[i].visible = true;
           previewSpriteArray[i].visible = true;
@@ -1189,14 +1171,14 @@ function resize(){
       }
 
     }
-  }
+
   
   graphics.alpha = 1.0;
   inAnimation = false;
   toggled = false;
   curImage = null;
 
-  if(selectedImage!=null&&!spriteDestroyed)
+  if(selectedImage!=null)
   {
     let k = selectedImage.num;
     // IF PLAYABLE, STOP AND HIDE
@@ -1222,13 +1204,8 @@ function resize(){
   {
     console.log('rectLength: '+ rectLength);
   }
-  if(!bingoMatched)
-    console.log('checkBingo: '+checkBingo());
 
-  if(threejsRenderer != null)
-  {
-    threejsResize();
-  }
+   
   
 }
 
@@ -1251,8 +1228,7 @@ ticker.start();
 
 function animate() {
   
-  if(!bingoMatched)
-  {
+
     // INCREASE IMAGE
     if(selectedImage!=null&&deltaScale>0&&currentMovementFrame<increaseMovementFrames)
     {
@@ -1435,7 +1411,7 @@ function animate() {
         { 
           spriteArray[i].alpha = 0.0;
 
-          if(!playableArray[i])
+          if(!playableArray[i]||restorePlayable)
           {
             textArray[i].visible = true;
             previewSpriteArray[i].visible = true;
@@ -1489,7 +1465,7 @@ function animate() {
         pendingResize = false;
         resize();
       }
-      console.log('checkBingo: '+checkBingo());
+
     }
 
     if(curImage && !curVideo &&selectedImage!=null&&shakyFrame<=shakyMaxFrames&&deltaScale == 0)
@@ -1657,86 +1633,7 @@ function animate() {
       curImage = null;
 
     }
-  }
-  else if(endPhase == 0)//if bingoMatched
-  {
-    if(currentMovementFrame<bingoFadeOutFrames)
-    {
-      let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/bingoFadeOutFrames);
 
-      for(let i=0;i<36;i++)
-      {
-        if(playableArray[i])
-        {
-          previewSpriteArray[i].alpha = 0;
-          textArray[i].alpha =0;
-        }
-        else
-        {
-          previewSpriteArray[i].alpha = (0-previewAlpha) * coeff + previewAlpha;
-          textArray[i].alpha = (0-1) * coeff + 1;
-          
-        }
-        
-      }
-      currentMovementFrame++;
-    }
-    else
-    {
-      if(!itemsDestroyed)
-      {
-        itemsDestroyed = true;
-        destroyAll();
-        
-      }
-      threejsInit();
-      requestAnimationFrame(render);
-      endPhase = 1;
-      currentMovementFrame = 0;
-      
-    }
-
-  }
-  else if(endPhase == 1)
-  {
-    if(threejsRenderer)
-    {
-      if(currentMovementFrame<radioFadeInFrames)
-      {
-        let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/radioFadeInFrames);
-
-        document.getElementById('threejs-background').style.opacity = coeff;
-        currentMovementFrame++;
-      }
-      else
-      {
-        endPhase = 2;
-        currentMovementFrame = 0;
-      }
-    }
-    
-  }
-  else if(endPhase == 2)
-  {
-    if(threejsRenderer)
-    {
-      if(currentMovementFrame<waitRedirectFrames)
-      {
-        let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/waitRedirectFrames);
-
-        //document.getElementById('threejs-background').style.opacity = coeff;
-        currentMovementFrame++;
-      }
-      else
-      {
-        endPhase = 3;
-        currentMovementFrame = 0;
-        redirect();
-      }
-    }
-    
-  }
-  
 
   renderer.render(stage);
   if(animateMode)
@@ -1746,265 +1643,9 @@ function animate() {
   
 }
 
-
-function checkBingo() {
-  let isBingo = true;
-  for(let i =0;i<36;i++)
-  {
-    if(playableArray[i])
-    {
-      if(!showArray[i])
-      {
-        isBingo = false;
-        return isBingo;
-      }
-    }
-  }
-  if(isBingo)
-  {
-    bingoMatched = true;
-    currentMovementFrame = 0;
-    stage.removeChild(graphics);
-    spriteDestroyed = true;
-    for(let i=0;i<36;i++)
-    {
-      stage.removeChild(spriteArray[i]);
-      stage.removeChild(videoArray[i]);
-      spriteArray[i].destroy({ options: true });
-      if(videoArray[i])videoArray[i].destroy({ options: true });
-    }
-
-
-  }
-  return isBingo;
-}
-
-
-function destroyAll() {
-  for(let i=0;i<36;i++)
-  {
-    stage.removeChild(previewSpriteArray[i]);
-    stage.removeChild(textArray[i]);
-    textArray[i].destroy({ options: true });
-    previewSpriteArray[i].destroy({ options: true });
-  }
-  //redirect();
-
-  
-}
-
 $('#info-alert').on('close.bs.alert', function () {
   // do something...
   document.getElementById('bingo').style.pointerEvents = 'auto';
 })
 
-function redirect() {
-  window.location.replace("https://encyclopedia.osisun.ch");
-}
 
-
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
-
-
-
-// Camera Setting
-{
-  var camPosX = 0; // -x to x is left to right
-  var camPosY = 0; // y is camera up and down
-  var camPosZ = 4; // +z farther from origin, -z into the origin
-  var fov = 30;
-  var aspect = window.innerWidth / window.innerHeight;
-  var near = 0.25;
-  var far = 20;
-}
-var useControls = true;
-
-
-
-
-
-
-function threejsInit() {
-
-  container = document.querySelector('#threejs-background');
-  //resizeContent();
-
-  if(showStats)
-  {
-    stats = new Stats();
-    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-    document.body.appendChild( stats.dom );
-  }
-
-  scene = new THREE.Scene();
-
-  {
-    
-    aspect = window.innerWidth / window.innerHeight;
-    camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
-    camera.position.set(camPosX, camPosY, camPosZ);
-    camera.updateProjectionMatrix();
-
-  }
-
-  new RGBELoader()
-    .setDataType( THREE.UnsignedByteType )
-    .load( 'encyclopedia/royal_esplanade_1k.hdr', function ( texture ) {
-
-      var envMap = pmremGenerator.fromEquirectangular( texture ).texture;
-
-      scene.environment = envMap;
-      
-      texture.dispose();
-      pmremGenerator.dispose();
-      if(isDebug) console.log('hdr loaded');
-      var gltfLoader = new GLTFLoader();
-
-      gltfLoader.load( 'encyclopedia/resource/2.gltf', function ( gltf ) {
-        gltf.scene.traverse( function ( child ) {
-          if ( child.isMesh ) {
-            // TOFIX RoughnessMipmapper seems to be broken with WebGL 2.0
-            // roughnessMipmapper.generateMipmaps( child.material );
-          }
-        } );
-
-        var objScale = 5;
-        gltf.scene.children[0].scale.x = objScale;
-        gltf.scene.children[0].scale.y = objScale;
-        gltf.scene.children[0].scale.z = objScale;
-        gltf.scene.rotation.z = -0.1;
-
-        scene.add( gltf.scene );
-        mercuryObject=gltf.scene.children[0];
-        mercuryObject.parent.position.x = -0.3;
-        if(window.innerHeight>window.innerWidth)
-          mercuryObject.parent.position.y = -0.2;
-        else
-          mercuryObject.parent.position.y = 0;
-
-        if(isDebug) console.log(mercuryObject);
-
-        } );
-
-  });
-
-  {
-    threejsRenderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
-    threejsRenderer.setPixelRatio( window.devicePixelRatio );
-    threejsRenderer.setSize( window.innerWidth, window.innerHeight );
-    threejsRenderer.toneMapping = THREE.ACESFilmicToneMapping;
-    threejsRenderer.toneMappingExposure = 1;
-    threejsRenderer.outputEncoding = THREE.sRGBEncoding;
-    threejsElement = container.appendChild( threejsRenderer.domElement );
-    /*
-    renderer.domElement.style.position = 'fixed';
-    renderer.domElement.style.left = '0px';
-    renderer.domElement.style.top = '0px';
-    renderer.domElement.style.zIndex = '-1';
-    */
-    var pmremGenerator = new THREE.PMREMGenerator( threejsRenderer );
-    pmremGenerator.compileEquirectangularShader();
-  }
-
-  // ORBIT CONTROLS
-  if(useControls)
-  {
-    controls = new OrbitControls( camera, threejsRenderer.domElement );
-    //controls.addEventListener( 'change', render ); // use if there is no animation loop
-    //controls.minDistance = 2;
-    controls.minDistance = 6;
-    //controls.maxDistance = 10;
-    if(isDebug)
-    {
-      controls.maxDistance = 20;
-    }
-    else
-    {
-      controls.maxDistance = 11;
-    }
-    
-    controls.mouseButtons = {
-      // LEFT: THREE.MOUSE.ROTATE,
-      // MIDDLE: THREE.MOUSE.DOLLY,
-      // RIGHT: THREE.MOUSE.PAN
-      LEFT: THREE.MOUSE.PAN,
-      MIDDLE: THREE.MOUSE.DOLLY
-    };
-    controls.touches = {
-      // ONE: THREE.TOUCH.ROTATE,
-      // TWO: THREE.TOUCH.DOLLY_PAN
-      ONE: THREE.TOUCH.DOLLY_PAN,
-      TWO: THREE.TOUCH.DOLLY_PAN
-    };
-    controls.enablePan = true;
-    controls.enableZoom = true;
-    controls.enableRotate = true;
-    controls.target.set( 0, 0, - 0.2 );
-    var minPan = new THREE.Vector3( - 2, -1, -0.2 );
-    var maxPan = new THREE.Vector3( 2, 1, -0.2 );
-    var _v = new THREE.Vector3();
-    
-    controls.addEventListener("change", function() {
-        _v.copy(controls.target);
-        controls.target.clamp(minPan, maxPan);
-        _v.sub(controls.target);
-        camera.position.sub(_v);
-        //console.log(controls.position0.z);
-    })
-
-    //createLimitPan({camera, controls, THREE});
-    controls.update();
-  }
-}
-
-function threejsResize() {
-  console.log('Threejs canvas is resized.')
- 
-  let windowAspect = window.innerWidth / window.innerHeight;
-  camera.aspect = windowAspect;
-  camera.updateProjectionMatrix();
-
-  threejsRenderer.setSize( window.innerWidth, window.innerHeight );
-
-}
-
-
-function render(time) {
-
-  if(showStats) stats.begin();
-
-  time *= 0.001; 
-
-  try {
-    mercuryObject.rotation.y = 1.2 * time * 0.5 + 2.0;
-    
-    
-
-  } catch (e) {
-      if (e instanceof TypeError) {
-          //printError(e, true);
-          console.log('Waiting object to be created');
-      } else {
-          //printError(e, false);
-          console.log(e);
-      }
-  }
-
-  threejsRenderer.render( scene, camera );
-
-  if(showStats) stats.end();
-
-  requestAnimationFrame(render);
-
-}
