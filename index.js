@@ -1,1 +1,2010 @@
-const _0x3062=['screen','TextStyle','utils','mouseButtons','none','type\x20error\x20','viewportWidth:\x20','sub','toneMapping','Segoe\x20UI\x20Emoji','outputEncoding','scene','innerWidth','visible','source','clamp','height','replace','rectLength:\x20','hidden','substring','anchor','innerHTML','Threejs\x20canvas\x20is\x20resized.','overflow-x','documentElement','Roboto','WebGLRenderer','SPAN','beginFill','change','texture','viewportHeight:\x20','length','updateProjectionMatrix','width','Texture','-apple-system','loop','location','WebGL','alpha','body','userAgent','begin','display','resource','lineStyle','compileEquirectangularShader','mobileCheck','Graphics','overflow','log','render','Segoe\x20UI\x20Symbol','load','appendChild','true','vendor','angle','block','fromEquirectangular','enableRotate','Noto\x20Sans','left','Scene','Vector3','2.gltf','scale','toString','set','dom','setAttribute','Arial','Helvetica\x20Neue','Mercury\x20Play\x20Back','opera','sRGBEncoding','sin','parent','opacity','domElement','rotation','bingoimages_preview/blank.jpg','PMREMGenerator','currentTime','from','getElementsByClassName','hdr\x20loaded','touches','position','addChild','push','screenWidth:\x20','drawRect','html','target','css','canvas','play','setPixelRatio','baseTexture','Text','interactive','clear','Sprite','Renderer','addEventListener','toneMappingExposure','isMesh','video','bingoimages/','bingo','test','videos/','threejs-background','debug-text','Waiting\x20object\x20to\x20be\x20created','endFill','zIndex','maxDistance','screenHeight:\x20','end','duration','MOUSE','Container','clientHeight','getElementById','fontSize','num','video\x20Paused','add','createElement','removeChild','style','aspect','children','orientationchange','mercury-play-back','checkBingo:\x20','bingo-loading','destroy','royal_esplanade_1k.hdr','BlinkMacSystemFont','oncanplay','top','sortableChildren','traverse','setDataType','clientWidth','.mp4','resources','All\x20Loaded.','50%','start','setSize','#info-alert','https://encyclopedia.osisun.ch','substr','innerHeight','pause','bingocanvas','pointerEvents','Apple\x20Color\x20Emoji','auto','pointerdown','PerspectiveCamera','sans-serif','Loader','enableZoom','TOUCH','minDistance','update','bingoimages_preview/','close.bs.alert','PAN','setChildIndex','environment','resize','UnsignedByteType','.jpg','_low.mp4','dispose','DOLLY','showPanel'];(function(_0x36e8f4,_0x306283){const _0x199c24=function(_0xc98398){while(--_0xc98398){_0x36e8f4['push'](_0x36e8f4['shift']());}};_0x199c24(++_0x306283);}(_0x3062,0x14a));const _0x199c=function(_0x36e8f4,_0x306283){_0x36e8f4=_0x36e8f4-0x0;let _0x199c24=_0x3062[_0x36e8f4];return _0x199c24;};import*as _0xc98398 from'https://unpkg.com/three@0.119.1/build/three.module.js';import{OrbitControls}from'https://unpkg.com/three@0.119.1/examples/jsm/controls/OrbitControls.js';import{GLTFLoader}from'https://unpkg.com/three@0.119.1/examples/jsm/loaders/GLTFLoader.js';import{RGBELoader}from'https://unpkg.com/three@0.119.1/examples/jsm/loaders/RGBELoader.js';import _0xd7f72e from'https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js';var container,controls,threejsElement,camera,scene,threejsRenderer;let mercuryObject;var stats,showStats=![];const canvas=document[_0x199c('0xa7')](_0x199c('0x10'));let curVideo=null,isDebug=![],debugElement=null,usePreview=!![],previewAlpha=0.6,isDark=!![],textOnTopLandscape=!![],bingoMatched=![],bingoFadeOutFrames=0x96,spriteDestroyed=![],itemsDestroyed=![],endPhase=0x0,radioFadeInFrames=0x12c,waitRedirectFrames=0x96,restoreImage=!![],disableUnclickable=![],playVideoInBingoBox=!![],loadedVideos=0x0,strokeWidth=0x1,strokeColor,fontColor,rectColor,screenColor,deltaAlpha;isDark?(strokeColor=0x0,fontColor=0xffffff,rectColor=0xffffff):(strokeColor=0xffffff,fontColor=0x484848,rectColor=0xeeeeee);![]&&(strokeColor=0xffffff,fontColor=0x0,rectColor=0xeeeeee);let highlightColor=0xeeeeee,fontSizeOffset=-0xc,autoclick=!![],animateMode=![],verticalMode,xOffset=0x0,yOffset=0x0,viewportWidth=document['documentElement'][_0x199c('0x4')],viewportHeight=document['documentElement'][_0x199c('0xa6')],screenWidth=window[_0x199c('0x28')]['width'],screenHeight=window[_0x199c('0x28')][_0x199c('0x38')],innerWidth=window[_0x199c('0x34')],innerHeight=window[_0x199c('0xe')],rectLength,spriteArray=[],previewSpriteArray=[],videoArray=[],bingoBoxVideoArray=[],xLoc=[],yLoc=[],showArray=[],textArray=[],bingoArray=[0x78,0x77,0x5f,0x6d,0x63,0x12,0x71,0x60,0x5b,0x73,0x61,0x70,0x6c,0x5a,0x74,0x72,0x5e,0x67,0x66,0x62,0x6e,0x6b,0x59,0x5c,0x75,0x5d,0x68,0x57,0x58,0x55,0x65,0x64,0x69,0x6a,0x56,0x6f],clickableArray=[0x1,0x1,0x0,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x0,0x1,0x0,0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x0,0x1,0x1,0x0,0x1,0x1,0x1,0x1,0x1,0x0,0x1,0x1,0x1,0x1,0x1],playableArray=[0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0],videoEndTimeArray=[0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,0x0,0x1,0x0],graphicsArray=[],useHighlight=!![],beforeX=0x0,beforeY=0x0,decreaseScale=0x0,increaseScale=0x0,deltaScale=0x0,deltaPosX=0x0,deltaPosY=0x0,selectedImage=null,curImage=null,toggled=![],inAnimation=![],pendingResize=![],isLoaded=![],loadedCnt=0x0,videoLoaded=[],increaseMovementFrames=0xf,decreaseMovementFrames=0xf,currentMovementFrame=0x0,shakyFrame=0x0,shakyMaxFrames=0x14,originX=0x0,originY=0x0;window[_0x199c('0x59')]=function(){let _0x166827=![];return function(_0x118bd4){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i[_0x199c('0x99')](_0x118bd4)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i[_0x199c('0x99')](_0x118bd4[_0x199c('0xd')](0x0,0x4)))_0x166827=!![];}(navigator[_0x199c('0x53')]||navigator[_0x199c('0x62')]||window[_0x199c('0x74')]),_0x166827;};let isMobileEnv=window[_0x199c('0x59')]();!isMobileEnv&&(fontSizeOffset=-0x4);let textStyle=new PIXI[(_0x199c('0x29'))]({'fontFamily':[_0x199c('0x4d'),_0x199c('0xb7'),'Segoe\x20UI',_0x199c('0x42'),_0x199c('0x72'),_0x199c('0x71'),_0x199c('0x67'),_0x199c('0x16'),_0x199c('0x12'),_0x199c('0x31'),_0x199c('0x5e'),'Noto\x20Color\x20Emoji'],'fontSize':0x24,'fontWeight':'400','fill':fontColor});if(isDebug)debugElement=document[_0x199c('0x7f')](_0x199c('0x9c'))[0x0];else for(let i=0x0;i<document['getElementsByClassName'](_0x199c('0x9c'))[_0x199c('0x49')];i++){document[_0x199c('0x7f')](_0x199c('0x9c'))[i][_0x199c('0xae')]['display']='none';}const stage=new PIXI[(_0x199c('0xa5'))](),loader=PIXI[_0x199c('0x17')]['shared'];stage[_0x199c('0x1')]=!![];let graphics=new PIXI[(_0x199c('0x5a'))](),renderWidth=viewportWidth,renderHeight=viewportHeight;if(!document[_0x199c('0xa7')](_0x199c('0xb2'))){let span=document[_0x199c('0xac')](_0x199c('0x44'));span[_0x199c('0x70')]('id',_0x199c('0xb2')),span[_0x199c('0x3e')]=_0x199c('0x73'),document[_0x199c('0xa7')]('bingo')[_0x199c('0x60')](span);}isDebug&&(console[_0x199c('0x5c')](_0x199c('0x2e')+viewportWidth),console[_0x199c('0x5c')](_0x199c('0x48')+viewportHeight),console[_0x199c('0x5c')]('screenWidth:\x20'+screenWidth),console[_0x199c('0x5c')](_0x199c('0xa1')+screenHeight),debugElement[_0x199c('0x3e')]=viewportWidth[_0x199c('0x6d')]()+',\x20'+viewportHeight[_0x199c('0x6d')]()+',\x20'+screenWidth[_0x199c('0x6d')]()+',\x20'+screenHeight[_0x199c('0x6d')]()+',\x20'+window[_0x199c('0x34')][_0x199c('0x6d')]()+',\x20'+window[_0x199c('0xe')]['toString']());viewportWidth<viewportHeight?(verticalMode=!![],window['mobileCheck']()?(rectLength=screenWidth,renderWidth=screenWidth):(rectLength=viewportWidth,renderWidth=viewportWidth),xOffset=0x0,yOffset=(viewportHeight-rectLength)/0x2,document[_0x199c('0xa7')](_0x199c('0xb2'))&&(yOffset>=0x50?(yOffset+=yOffset/0x3,document[_0x199c('0xa7')](_0x199c('0xb2'))['style'][_0x199c('0x55')]=_0x199c('0x64'),document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x68')]=(rectLength/0x2)[_0x199c('0x6d')]()+'px',document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x0')]=(yOffset/0x2)[_0x199c('0x6d')]()+'px'):document['getElementById']('mercury-play-back')['style'][_0x199c('0x55')]='none')):(verticalMode=![],rectLength=innerHeight,xOffset=(viewportWidth-rectLength)/0x2,yOffset=0x0,renderHeight=innerHeight,document[_0x199c('0xa7')](_0x199c('0xb2'))&&(textOnTopLandscape?innerHeight>0x190?(yOffset+=rectLength/0x6,document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x64'),document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')]['top']=(yOffset/0x2)[_0x199c('0x6d')]()+'px',document['getElementById'](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x68')]=_0x199c('0x8'),rectLength-=yOffset*0x3/0x2,xOffset=(viewportWidth-rectLength)/0x2):document[_0x199c('0xa7')]('mercury-play-back')[_0x199c('0xae')]['display']='none':xOffset>=0x96?(xOffset+=xOffset/1.5,document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x64'),document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')]['top']=(rectLength/0x2)[_0x199c('0x6d')]()+'px',document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')]['left']=(xOffset/0x2)[_0x199c('0x6d')]()+'px'):document['getElementById'](_0x199c('0xb2'))['style']['display']=_0x199c('0x2c')));document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x68')]=(xOffset+rectLength/0x2)['toString']()+'px',document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')]['top']=(yOffset+rectLength/0x2)[_0x199c('0x6d')]()+'px',window['onorientationchange']=function(){let _0x6d3324=$(_0x199c('0x87')),_0x53ae94=$(_0x199c('0x52'));$(window)[_0x199c('0x34')]()<$(window)[_0x199c('0xe')]()?(_0x6d3324[_0x199c('0x89')](_0x199c('0x40'),_0x199c('0x3b')),_0x53ae94[_0x199c('0x89')](_0x199c('0x40'),_0x199c('0x3b'))):(_0x6d3324[_0x199c('0x89')](_0x199c('0x5b'),_0x199c('0x13')),_0x53ae94[_0x199c('0x89')]('overflow',_0x199c('0x13')),_0x6d3324[_0x199c('0x89')]('overflow-x',_0x199c('0x13')),_0x53ae94['css']('overflow-x',_0x199c('0x13')));};let type=_0x199c('0x50');!PIXI[_0x199c('0x2a')]['isWebGLSupported']()&&(type=_0x199c('0x8a'));isDark?screenColor=0x0:screenColor=0xffffff;const renderer=new PIXI[(_0x199c('0x92'))]({'view':canvas,'width':renderWidth,'height':renderHeight,'autoDensity':!![],'backgroundColor':screenColor,'resolution':window['devicePixelRatio']});window[_0x199c('0x93')]('resize',resize),window[_0x199c('0x93')](_0x199c('0xb1'),resize);let pathArray=[],previewArray=[];for(let i=0x0;i<0x24;i++){let str=(0x55+i)[_0x199c('0x6d')]();if(str[_0x199c('0x49')]>0x2)str=str[_0x199c('0x3c')](str['length']-0x2);pathArray[i]=_0x199c('0x97')+str+_0x199c('0x23');if(i!=0x5&&i!=0xa&&i!=0x10&&i!=0x16&&i!=0x1b&&i!=0x20)previewArray[_0x199c('0x84')](_0x199c('0x1c')+str+_0x199c('0x23'));if(useHighlight&&playableArray[i])graphicsArray[i]=new PIXI[(_0x199c('0x5a'))]();}loader['add'](pathArray)[_0x199c('0xab')](previewArray)['add']('bingoimages_preview/blank.jpg')[_0x199c('0x5f')](setup);function setup(){for(let _0x251bc1=0x0;_0x251bc1<0x24;_0x251bc1++){bingoArray[_0x251bc1]-=0x55;}for(let _0x1bf193=0x0;_0x1bf193<0x24;_0x1bf193++){let _0x423994=bingoArray[_0x1bf193],_0x20399c=(_0x423994+0x55)['toString']();if(_0x20399c['length']>0x2)_0x20399c=_0x20399c[_0x199c('0x3c')](_0x20399c[_0x199c('0x49')]-0x2);try{spriteArray[_0x1bf193]=new PIXI['Sprite'](loader[_0x199c('0x6')][_0x199c('0x97')+_0x20399c+_0x199c('0x23')]['texture']),clickableArray[_0x1bf193]==0x1?previewSpriteArray[_0x1bf193]=new PIXI[(_0x199c('0x91'))](loader['resources'][_0x199c('0x1c')+_0x20399c+'.jpg']['texture']):previewSpriteArray[_0x1bf193]=new PIXI['Sprite'](loader[_0x199c('0x6')][_0x199c('0x7b')][_0x199c('0x47')]),playableArray[_0x1bf193]&&(isMobileEnv?videoArray[_0x1bf193]=new PIXI[(_0x199c('0x91'))](PIXI[_0x199c('0x4c')][_0x199c('0x7e')](_0x199c('0x9a')+_0x20399c+_0x199c('0x24'))):videoArray[_0x1bf193]=new PIXI[(_0x199c('0x91'))](PIXI['Texture'][_0x199c('0x7e')](_0x199c('0x9a')+_0x20399c+_0x199c('0x5'))),bingoBoxVideoArray[_0x1bf193]=new PIXI[(_0x199c('0x91'))](PIXI[_0x199c('0x4c')][_0x199c('0x7e')](_0x199c('0x9a')+_0x20399c+_0x199c('0x24'))));}catch(_0x52a274){_0x52a274 instanceof TypeError?console[_0x199c('0x5c')](_0x199c('0x2d')+_0x20399c):console[_0x199c('0x5c')](_0x52a274);}textArray[_0x1bf193]=new PIXI[(_0x199c('0x8e'))](_0x20399c);}if(rectLength>=0x320)strokeWidth=0x5,textStyle[_0x199c('0xa8')]=0x24+fontSizeOffset;else{if(rectLength>=0x258)strokeWidth=0x4,textStyle[_0x199c('0xa8')]=0x20+fontSizeOffset;else{if(rectLength>=0x190)strokeWidth=0x3,textStyle[_0x199c('0xa8')]=0x1c+fontSizeOffset;else rectLength>=0xfa?(strokeWidth=0x2,textStyle[_0x199c('0xa8')]=0x18+fontSizeOffset):(strokeWidth=0x1,textStyle[_0x199c('0xa8')]=0x14+fontSizeOffset);}}strokeWidth=0x1,graphics[_0x199c('0x57')](strokeWidth,strokeColor,0x1,0x0),graphics[_0x199c('0x45')](rectColor),graphics['zIndex']=-0x1;for(let _0x5c7cdd=0x0;_0x5c7cdd<0x24;_0x5c7cdd++){xLoc[_0x5c7cdd]=xOffset+rectLength*(_0x5c7cdd%0x6)/0x6+rectLength/0xc,yLoc[_0x5c7cdd]=yOffset+rectLength*parseInt(_0x5c7cdd/0x6)/0x6+rectLength/0xc,spriteArray[_0x5c7cdd]['x']=xLoc[_0x5c7cdd],spriteArray[_0x5c7cdd]['y']=yLoc[_0x5c7cdd],spriteArray[_0x5c7cdd][_0x199c('0x4b')]=rectLength/0x6-0x2*strokeWidth,spriteArray[_0x5c7cdd][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth,spriteArray[_0x5c7cdd][_0x199c('0xa9')]=_0x5c7cdd,spriteArray[_0x5c7cdd][_0x199c('0x8f')]=!![],spriteArray[_0x5c7cdd][_0x199c('0x3d')][_0x199c('0x6e')](0.5),spriteArray[_0x5c7cdd]['on'](_0x199c('0x14'),_0x192dcd),showArray[_0x5c7cdd]=![],spriteArray[_0x5c7cdd][_0x199c('0x51')]=0x0,usePreview?(previewSpriteArray[_0x5c7cdd]['x']=xLoc[_0x5c7cdd],previewSpriteArray[_0x5c7cdd]['y']=yLoc[_0x5c7cdd],previewSpriteArray[_0x5c7cdd][_0x199c('0x4b')]=rectLength/0x6-0x2*strokeWidth,previewSpriteArray[_0x5c7cdd][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth,previewSpriteArray[_0x5c7cdd][_0x199c('0xa9')]=_0x5c7cdd,previewSpriteArray[_0x5c7cdd]['zIndex']=-0.8,previewSpriteArray[_0x5c7cdd][_0x199c('0x51')]=previewAlpha,previewSpriteArray[_0x5c7cdd][_0x199c('0x3d')]['set'](0.5),stage[_0x199c('0x83')](previewSpriteArray[_0x5c7cdd])):graphics['drawRect'](xOffset+rectLength*(_0x5c7cdd%0x6)/0x6,yOffset+rectLength*parseInt(_0x5c7cdd/0x6)/0x6,rectLength/0x6,rectLength/0x6),textArray[_0x5c7cdd]['x']=xLoc[_0x5c7cdd],textArray[_0x5c7cdd]['y']=yLoc[_0x5c7cdd],textArray[_0x5c7cdd][_0x199c('0x3d')][_0x199c('0x6e')](0.5),textArray[_0x5c7cdd]['style']=textStyle,textArray[_0x5c7cdd][_0x199c('0x9f')]=-0.5,stage[_0x199c('0x83')](textArray[_0x5c7cdd]),stage[_0x199c('0x83')](spriteArray[_0x5c7cdd]),playableArray[_0x5c7cdd]&&(videoArray[_0x5c7cdd]['x']=xOffset,videoArray[_0x5c7cdd]['y']=yOffset,videoArray[_0x5c7cdd][_0x199c('0x4b')]=rectLength,videoArray[_0x5c7cdd][_0x199c('0x38')]=rectLength,videoArray[_0x5c7cdd][_0x199c('0x9f')]=0x1,videoArray[_0x5c7cdd][_0x199c('0x8f')],stage[_0x199c('0x83')](videoArray[_0x5c7cdd]),videoArray[_0x5c7cdd][_0x199c('0x47')][_0x199c('0x8d')]['resource'][_0x199c('0x36')][_0x199c('0xf')](),videoLoaded[_0x5c7cdd]=![],spriteArray[_0x5c7cdd][_0x199c('0x96')]=videoArray[_0x5c7cdd],videoArray[_0x5c7cdd][_0x199c('0x51')]=0x0,videoArray[_0x5c7cdd][_0x199c('0x47')]['baseTexture'][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0xb8')]=function(){videoLoaded[_0x5c7cdd]=!![],document[_0x199c('0xa7')]('bingo-loading')[_0x199c('0xae')][_0x199c('0x55')]='none',loadedVideos++;if(loadedVideos==0x6){if(isDebug)debugElement[_0x199c('0x3e')]=_0x199c('0x7');}},videoArray[_0x5c7cdd][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0x70')]('muted',_0x199c('0x61')),document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x2c'),useHighlight&&(graphicsArray[_0x5c7cdd][_0x199c('0x57')](strokeWidth*0x2,highlightColor,0x1,0x0),graphicsArray[_0x5c7cdd][_0x199c('0x45')](0xffffff),graphicsArray[_0x5c7cdd][_0x199c('0x86')](xOffset+rectLength*(_0x5c7cdd%0x6)/0x6-strokeWidth,yOffset+rectLength*parseInt(_0x5c7cdd/0x6)/0x6-strokeWidth,rectLength/0x6+0x2*strokeWidth,rectLength/0x6+0x2*strokeWidth),graphicsArray[_0x5c7cdd][_0x199c('0x9f')]=-0.5,graphicsArray[_0x5c7cdd]['alpha']=0x0,stage[_0x199c('0x83')](graphicsArray[_0x5c7cdd]),graphicsArray[_0x5c7cdd][_0x199c('0x9e')]()),playVideoInBingoBox&&(bingoBoxVideoArray[_0x5c7cdd]['x']=xLoc[_0x5c7cdd],bingoBoxVideoArray[_0x5c7cdd]['y']=yLoc[_0x5c7cdd],bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x4b')]=rectLength/0x6-0x2*strokeWidth,bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth,bingoBoxVideoArray[_0x5c7cdd]['num']=_0x5c7cdd,bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x8f')]=![],bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x3d')]['set'](0.5),bingoBoxVideoArray[_0x5c7cdd]['on'](_0x199c('0x14'),_0x192dcd),bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x51')]=0x0,bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0x7d')]=0x0,bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')]['play'](),bingoBoxVideoArray[_0x5c7cdd][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')]['source'][_0x199c('0x4e')]=!![],stage[_0x199c('0x83')](bingoBoxVideoArray[_0x5c7cdd]))),loadedCnt++,loadedCnt==0x24&&(isLoaded=!![],pendingResize&&(pendingResize=![],resize()));}stage[_0x199c('0x83')](graphics),graphics[_0x199c('0x9e')]();if(spriteArray[0x0]!=null){decreaseScale=spriteArray[0x0][_0x199c('0x6c')]['x'];let _0x3c9f4d=spriteArray[0x0][_0x199c('0x4b')];spriteArray[0x0]['width']=rectLength/0x6,increaseScale=spriteArray[0x0][_0x199c('0x6c')]['x']*0x6,spriteArray[0x0][_0x199c('0x4b')]=_0x3c9f4d;}function _0x192dcd(_0x22ec85){if(bingoMatched)return;if(toggled==![]&&inAnimation==![]){if(this[_0x199c('0x51')]!=0x0){if(disableUnclickable&&clickableArray[this[_0x199c('0xa9')]]==0x0)return;beforeX=this['x'],beforeY=this['y'];for(let _0x3554cd=0x0;_0x3554cd<0x24;_0x3554cd++){stage[_0x199c('0x1f')](spriteArray[_0x3554cd],0x0);}this[_0x199c('0x9f')]=0x1,selectedImage=this,deltaScale=increaseScale-decreaseScale,originX=this['x'],originY=this['y'],deltaPosX=xOffset+rectLength/0x2-this['x'],deltaPosY=yOffset+rectLength/0x2-this['y'],deltaAlpha=-0x1/ increaseMovementFrames,inAnimation=!![],currentMovementFrame=0x0,shakyFrame=0x0,selectedImage[_0x199c('0x63')]=0x0,curImage=selectedImage;if(playVideoInBingoBox){}}else{this[_0x199c('0x51')]=0x1;let _0xd50f66=-0x1;for(let _0x55ba22=0x0;_0x55ba22<0x24;_0x55ba22++){if(spriteArray[_0x55ba22]==this){_0xd50f66=_0x55ba22;break;}}showArray[_0xd50f66]=!![],textArray[_0xd50f66][_0x199c('0x35')]=![],previewSpriteArray[_0xd50f66][_0x199c('0x35')]=![];if(useHighlight&&playableArray[_0xd50f66])graphicsArray[_0xd50f66][_0x199c('0x51')]=0x1;if(autoclick==!![]){if(disableUnclickable&&clickableArray[this[_0x199c('0xa9')]]==0x0)return;beforeX=this['x'],beforeY=this['y'];for(let _0x1fc2e0=0x0;_0x1fc2e0<0x24;_0x1fc2e0++){stage[_0x199c('0x1f')](spriteArray[_0x1fc2e0],0x0);}this[_0x199c('0x9f')]=0x1,selectedImage=this,deltaScale=increaseScale-decreaseScale,originX=this['x'],originY=this['y'],deltaPosX=xOffset+rectLength/0x2-this['x'],deltaPosY=yOffset+rectLength/0x2-this['y'],deltaAlpha=-0x1/ increaseMovementFrames,inAnimation=!![],currentMovementFrame=0x0,shakyFrame=0x0,selectedImage[_0x199c('0x63')]=0x0,curImage=selectedImage;if(playVideoInBingoBox){}}}}else{if(toggled==!![]&&inAnimation==![]){selectedImage=this;let _0x20f6c3=selectedImage[_0x199c('0xa9')];if(playableArray[_0x20f6c3]){videoArray[_0x20f6c3][_0x199c('0x51')]=0x0,videoArray[_0x20f6c3][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')]['pause']();if(isDebug)console[_0x199c('0x5c')]('video\x20Paused');document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x2c');}this[_0x199c('0x9f')]=0x0,deltaScale=decreaseScale-increaseScale,originX=this['x'],originY=this['y'],deltaPosX=beforeX-this['x'],deltaPosY=beforeY-this['y'],deltaAlpha=0x1/decreaseMovementFrames,inAnimation=!![],currentMovementFrame=0x0,shakyFrame=0x0,selectedImage[_0x199c('0x63')]=0x0,curImage=null,curVideo=null;}}!animateMode&&renderer[_0x199c('0x5d')](stage);}renderer[_0x199c('0x5d')](stage);}function resize(){if(inAnimation||isLoaded==![]){pendingResize=!![];return;}viewportWidth=document['documentElement']['clientWidth'],viewportHeight=document[_0x199c('0x41')]['clientHeight'],screenWidth=window['screen']['width'],screenHeight=window[_0x199c('0x28')][_0x199c('0x38')],innerWidth=window[_0x199c('0x34')],innerHeight=window['innerHeight'];isDebug&&(console[_0x199c('0x5c')]('viewportWidth:\x20'+viewportWidth),console['log']('viewportHeight:\x20'+viewportHeight),console[_0x199c('0x5c')](_0x199c('0x85')+screenWidth),console['log'](_0x199c('0xa1')+screenHeight),debugElement['innerHTML']=viewportWidth[_0x199c('0x6d')]()+',\x20'+viewportHeight['toString']()+',\x20'+screenWidth[_0x199c('0x6d')]()+',\x20'+screenHeight['toString']()+',\x20'+window[_0x199c('0x34')][_0x199c('0x6d')]()+',\x20'+window[_0x199c('0xe')][_0x199c('0x6d')]());viewportWidth<viewportHeight?(verticalMode=!![],window['mobileCheck']()?(rectLength=screenWidth,renderWidth=screenWidth):(rectLength=viewportWidth,renderWidth=viewportWidth),xOffset=0x0,yOffset=(viewportHeight-rectLength)/0x2,document[_0x199c('0xa7')](_0x199c('0xb2'))&&(yOffset>=0x50?(yOffset+=yOffset/0x3,document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')]['display']=_0x199c('0x64'),document[_0x199c('0xa7')](_0x199c('0xb2'))['style'][_0x199c('0x68')]=(rectLength/0x2)[_0x199c('0x6d')]()+'px',document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x0')]=(yOffset/0x2)[_0x199c('0x6d')]()+'px'):document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x55')]='none'),renderer[_0x199c('0x21')](renderWidth,viewportHeight)):(verticalMode=![],rectLength=innerHeight,xOffset=(viewportWidth-rectLength)/0x2,yOffset=0x0,document[_0x199c('0xa7')](_0x199c('0xb2'))&&(textOnTopLandscape?innerHeight>0x190?(yOffset+=rectLength/0x6,document[_0x199c('0xa7')](_0x199c('0xb2'))['style'][_0x199c('0x55')]=_0x199c('0x64'),document[_0x199c('0xa7')]('mercury-play-back')[_0x199c('0xae')][_0x199c('0x0')]=(yOffset/0x2)[_0x199c('0x6d')]()+'px',document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')][_0x199c('0x68')]='50%',rectLength-=yOffset*0x3/0x2,xOffset=(viewportWidth-rectLength)/0x2):document[_0x199c('0xa7')]('mercury-play-back')['style']['display']=_0x199c('0x2c'):xOffset>=0x96?(xOffset+=xOffset/1.5,document[_0x199c('0xa7')](_0x199c('0xb2'))[_0x199c('0xae')]['display']=_0x199c('0x64'),document['getElementById']('mercury-play-back')[_0x199c('0xae')][_0x199c('0x0')]=(rectLength/0x2)[_0x199c('0x6d')]()+'px',document[_0x199c('0xa7')](_0x199c('0xb2'))['style'][_0x199c('0x68')]=(xOffset/0x2)['toString']()+'px'):document['getElementById']('mercury-play-back')['style'][_0x199c('0x55')]=_0x199c('0x2c')),renderer['resize'](viewportWidth,innerHeight));document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x68')]=(xOffset+rectLength/0x2)['toString']()+'px',document['getElementById']('bingo-loading')[_0x199c('0xae')][_0x199c('0x0')]=(yOffset+rectLength/0x2)['toString']()+'px';if(rectLength>=0x320)strokeWidth=0x5,textStyle[_0x199c('0xa8')]=0x24+fontSizeOffset;else{if(rectLength>=0x258)strokeWidth=0x4,textStyle['fontSize']=0x20+fontSizeOffset;else{if(rectLength>=0x190)strokeWidth=0x3,textStyle['fontSize']=0x1c+fontSizeOffset;else rectLength>=0xfa?(strokeWidth=0x2,textStyle[_0x199c('0xa8')]=0x18+fontSizeOffset):(strokeWidth=0x1,textStyle['fontSize']=0x14+fontSizeOffset);}}strokeWidth=0x1,graphics['clear'](),graphics[_0x199c('0x57')](strokeWidth,strokeColor,0x1,0x0),graphics[_0x199c('0x9f')]=-0x1,graphics['beginFill'](rectColor);for(let _0x527979=0x0;_0x527979<0x24;_0x527979++){xLoc[_0x527979]=xOffset+rectLength*(_0x527979%0x6)/0x6+rectLength/0xc,yLoc[_0x527979]=yOffset+rectLength*parseInt(_0x527979/0x6)/0x6+rectLength/0xc;!spriteDestroyed&&(spriteArray[_0x527979]['x']=xLoc[_0x527979],spriteArray[_0x527979]['y']=yLoc[_0x527979],spriteArray[_0x527979][_0x199c('0x4b')]=rectLength/0x6-0x2*strokeWidth,spriteArray[_0x527979][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth,spriteArray[_0x527979]['zIndex']=0x0);!itemsDestroyed&&(usePreview?(previewSpriteArray[_0x527979]['x']=xLoc[_0x527979],previewSpriteArray[_0x527979]['y']=yLoc[_0x527979],previewSpriteArray[_0x527979]['width']=rectLength/0x6-0x2*strokeWidth,previewSpriteArray[_0x527979][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth,previewSpriteArray[_0x527979][_0x199c('0x9f')]=-0.8):graphics['drawRect'](xOffset+rectLength*(_0x527979%0x6)/0x6,yOffset+rectLength*parseInt(_0x527979/0x6)/0x6,rectLength/0x6,rectLength/0x6),textArray[_0x527979]['x']=xLoc[_0x527979],textArray[_0x527979]['y']=yLoc[_0x527979],textArray[_0x527979]['style']=textStyle,textArray[_0x527979][_0x199c('0x9f')]=-0.5);if(playableArray[_0x527979]){!spriteDestroyed&&(videoArray[_0x527979]['x']=xOffset,videoArray[_0x527979]['y']=yOffset,videoArray[_0x527979][_0x199c('0x4b')]=rectLength,videoArray[_0x527979]['height']=rectLength,videoArray[_0x527979]['texture'][_0x199c('0x8d')][_0x199c('0x56')]['source'][_0x199c('0xf')](),videoArray[_0x527979][_0x199c('0x51')]=0x0);document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x2c');if(useHighlight){graphicsArray[_0x527979][_0x199c('0x90')](),graphicsArray[_0x527979]['lineStyle'](strokeWidth*0x2,highlightColor,0x1,0x0),graphicsArray[_0x527979]['beginFill'](0xffffff),graphicsArray[_0x527979][_0x199c('0x86')](xOffset+rectLength*(_0x527979%0x6)/0x6-strokeWidth,yOffset+rectLength*parseInt(_0x527979/0x6)/0x6-strokeWidth,rectLength/0x6+0x2*strokeWidth,rectLength/0x6+0x2*strokeWidth),graphicsArray[_0x527979][_0x199c('0x9f')]=-0.5;if(showArray[_0x527979])graphicsArray[_0x527979][_0x199c('0x51')]=0x1;else graphicsArray[_0x527979][_0x199c('0x51')]=0x0;graphicsArray[_0x527979]['endFill']();}playVideoInBingoBox&&(bingoBoxVideoArray[_0x527979]['x']=xLoc[_0x527979],bingoBoxVideoArray[_0x527979]['y']=yLoc[_0x527979],bingoBoxVideoArray[_0x527979][_0x199c('0x4b')]=rectLength/0x6-0x2*strokeWidth,bingoBoxVideoArray[_0x527979][_0x199c('0x38')]=rectLength/0x6-0x2*strokeWidth);}}graphics[_0x199c('0x9e')]();if(!spriteDestroyed){if(spriteArray[0x0]!=null){decreaseScale=spriteArray[0x0][_0x199c('0x6c')]['x'];let _0xc3eaf6=spriteArray[0x0][_0x199c('0x4b')];spriteArray[0x0][_0x199c('0x4b')]=rectLength/0x6,increaseScale=spriteArray[0x0][_0x199c('0x6c')]['x']*0x6,spriteArray[0x0][_0x199c('0x4b')]=_0xc3eaf6;}for(let _0x348c10=0x0;_0x348c10<0x24;_0x348c10++){if(!restoreImage){if(showArray[_0x348c10]){spriteArray[_0x348c10][_0x199c('0x51')]=0x1;if(useHighlight&&playableArray[_0x348c10])graphicsArray[_0x348c10][_0x199c('0x51')]=0x1;}else textArray[_0x348c10][_0x199c('0x51')]=0x1,previewSpriteArray[_0x348c10][_0x199c('0x51')]=previewAlpha;}else{spriteArray[_0x348c10][_0x199c('0x51')]=0x0;if(!playableArray[_0x348c10])textArray[_0x348c10][_0x199c('0x35')]=!![],previewSpriteArray[_0x348c10][_0x199c('0x35')]=!![],textArray[_0x348c10][_0x199c('0x51')]=0x1,previewSpriteArray[_0x348c10]['alpha']=previewAlpha,showArray[_0x348c10]=![];else{if(showArray[_0x348c10]){playVideoInBingoBox?(spriteArray[_0x348c10][_0x199c('0x51')]=0x0,bingoBoxVideoArray[_0x348c10][_0x199c('0x51')]=0x1,bingoBoxVideoArray[_0x348c10][_0x199c('0x47')]['baseTexture'][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0x7d')]=0x0,bingoBoxVideoArray[_0x348c10][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')]['source'][_0x199c('0x8b')](),bingoBoxVideoArray[_0x348c10][_0x199c('0x47')]['baseTexture']['resource'][_0x199c('0x36')][_0x199c('0x4e')]=!![]):spriteArray[_0x348c10][_0x199c('0x51')]=0x1;if(useHighlight)graphicsArray[_0x348c10][_0x199c('0x51')]=0x1;}else textArray[_0x348c10][_0x199c('0x35')]=!![],previewSpriteArray[_0x348c10][_0x199c('0x35')]=!![],textArray[_0x348c10]['alpha']=0x1,previewSpriteArray[_0x348c10][_0x199c('0x51')]=previewAlpha;}}}}graphics[_0x199c('0x51')]=0x1,inAnimation=![],toggled=![],curImage=null;if(selectedImage!=null&&!spriteDestroyed){let _0x19de31=selectedImage['num'];if(playableArray[_0x19de31]){videoArray[_0x19de31][_0x199c('0x51')]=0x0;if(isDebug)console[_0x199c('0x5c')](_0x199c('0xaa'));videoArray[_0x19de31][_0x199c('0x47')]['baseTexture']['resource'][_0x199c('0x36')][_0x199c('0xf')](),document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x2c');}}!animateMode&&renderer[_0x199c('0x5d')](stage);isDebug&&console[_0x199c('0x5c')](_0x199c('0x3a')+rectLength);if(!bingoMatched)console[_0x199c('0x5c')](_0x199c('0xb3')+checkBingo());threejsRenderer!=null&&threejsResize();}const ticker=new PIXI['Ticker']();ticker['add'](animate),ticker[_0x199c('0x9')]();function animate(){if(!bingoMatched){if(selectedImage!=null&&deltaScale>0x0&&currentMovementFrame<increaseMovementFrames){let _0x5b98da=Math['sin'](Math['PI']/0x2*currentMovementFrame/ increaseMovementFrames);selectedImage[_0x199c('0x6c')]['x']=deltaScale*_0x5b98da+decreaseScale,selectedImage[_0x199c('0x6c')]['y']=deltaScale*_0x5b98da+decreaseScale,selectedImage['x']=deltaPosX*_0x5b98da+originX,selectedImage['y']=deltaPosY*_0x5b98da+originY;for(let _0x23dea4=0x0;_0x23dea4<0x24;_0x23dea4++){if(showArray[_0x23dea4]){playVideoInBingoBox&&playableArray[_0x23dea4]?(spriteArray[_0x23dea4][_0x199c('0x51')]=0x0,bingoBoxVideoArray[_0x23dea4]['alpha']=(0x0-0x1)*_0x5b98da+0x1):spriteArray[_0x23dea4]['alpha']=(0x0-0x1)*_0x5b98da+0x1;spriteArray[_0x23dea4]['alpha']=(0x0-0x1)*_0x5b98da+0x1;if(useHighlight&&playableArray[_0x23dea4])graphicsArray[_0x23dea4][_0x199c('0x51')]=(0x0-0x1)*_0x5b98da+0x1;}else textArray[_0x23dea4][_0x199c('0x51')]=(0x0-0x1)*_0x5b98da+0x1,previewSpriteArray[_0x23dea4]['alpha']=(0x0-previewAlpha)*_0x5b98da+previewAlpha;}graphics[_0x199c('0x51')]=(0x0-0x1)*_0x5b98da+0x1,selectedImage[_0x199c('0x51')]=0x1,currentMovementFrame++;}if(selectedImage!=null&&deltaScale<0x0&&currentMovementFrame<decreaseMovementFrames){let _0x370968=Math[_0x199c('0x76')](Math['PI']/0x2*currentMovementFrame/decreaseMovementFrames);selectedImage['scale']['x']=deltaScale*_0x370968+increaseScale,selectedImage[_0x199c('0x6c')]['y']=deltaScale*_0x370968+increaseScale,selectedImage['x']=deltaPosX*_0x370968+originX,selectedImage['y']=deltaPosY*_0x370968+originY;for(let _0x5233f7=0x0;_0x5233f7<0x24;_0x5233f7++){if(showArray[_0x5233f7]){playVideoInBingoBox&&playableArray[_0x5233f7]?(spriteArray[_0x5233f7][_0x199c('0x51')]=0x0,bingoBoxVideoArray[_0x5233f7][_0x199c('0x51')]=(0x1-0x0)*_0x370968):spriteArray[_0x5233f7][_0x199c('0x51')]=(0x1-0x0)*_0x370968;if(useHighlight&&playableArray[_0x5233f7])graphicsArray[_0x5233f7][_0x199c('0x51')]=(0x1-0x0)*_0x370968;}else textArray[_0x5233f7][_0x199c('0x51')]=(0x1-0x0)*_0x370968,previewSpriteArray[_0x5233f7][_0x199c('0x51')]=(previewAlpha-0x0)*_0x370968;}graphics[_0x199c('0x51')]=(0x1-0x0)*_0x370968,selectedImage[_0x199c('0x51')]=0x1,currentMovementFrame++;}if(selectedImage!=null&&deltaScale>0x0&&currentMovementFrame>=increaseMovementFrames){currentMovementFrame=0x0,deltaScale=0x0,selectedImage['scale']['x']=increaseScale,selectedImage[_0x199c('0x6c')]['y']=increaseScale,selectedImage['x']=xOffset+rectLength/0x2,selectedImage['y']=yOffset+rectLength/0x2;for(let _0x2da297=0x0;_0x2da297<0x24;_0x2da297++){if(showArray[_0x2da297]){spriteArray[_0x2da297][_0x199c('0x51')]=0x0;if(useHighlight&&playableArray[_0x2da297])graphicsArray[_0x2da297]['alpha']=0x0;}else textArray[_0x2da297]['alpha']=0x0,previewSpriteArray[_0x2da297]['alpha']=0x0;}graphics[_0x199c('0x51')]=0x0,selectedImage[_0x199c('0x51')]=0x1,inAnimation=![],toggled=!![];pendingResize&&(pendingResize=![],resize());let _0x26f1b8=selectedImage['num'];if(playableArray[_0x26f1b8]){videoArray[_0x26f1b8][_0x199c('0x51')]=0x1,videoArray[_0x26f1b8][_0x199c('0x47')]['baseTexture'][_0x199c('0x56')][_0x199c('0x36')]['currentTime']=0x0,videoArray[_0x26f1b8][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0x8b')](),videoArray[_0x26f1b8][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')]['loop']=![],curVideo=videoArray[_0x26f1b8][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')]['source'];if(isDebug)console[_0x199c('0x5c')](curVideo);!videoLoaded[_0x26f1b8]?document['getElementById'](_0x199c('0xb4'))[_0x199c('0xae')]['display']=_0x199c('0x64'):document[_0x199c('0xa7')](_0x199c('0xb4'))[_0x199c('0xae')][_0x199c('0x55')]=_0x199c('0x2c');}}if(selectedImage!=null&&deltaScale<0x0&&currentMovementFrame>=decreaseMovementFrames){currentMovementFrame=0x0,deltaScale=0x0,selectedImage[_0x199c('0x6c')]['x']=decreaseScale,selectedImage[_0x199c('0x6c')]['y']=decreaseScale,selectedImage['x']=beforeX,selectedImage['y']=beforeY;for(let _0x203d4c=0x0;_0x203d4c<0x24;_0x203d4c++){if(!restoreImage){if(showArray[_0x203d4c]){playVideoInBingoBox&&playableArray[_0x203d4c]?bingoBoxVideoArray[_0x203d4c]['alpha']=0x1:spriteArray[_0x203d4c][_0x199c('0x51')]=0x1;if(useHighlight&&playableArray[_0x203d4c])graphicsArray[_0x203d4c][_0x199c('0x51')]=0x1;}else textArray[_0x203d4c][_0x199c('0x51')]=0x1,previewSpriteArray[_0x203d4c]['alpha']=previewAlpha;}else{spriteArray[_0x203d4c][_0x199c('0x51')]=0x0;if(!playableArray[_0x203d4c])textArray[_0x203d4c][_0x199c('0x35')]=!![],previewSpriteArray[_0x203d4c][_0x199c('0x35')]=!![],textArray[_0x203d4c][_0x199c('0x51')]=0x1,previewSpriteArray[_0x203d4c][_0x199c('0x51')]=previewAlpha,showArray[_0x203d4c]=![];else{if(showArray[_0x203d4c]){playVideoInBingoBox?(spriteArray[_0x203d4c]['alpha']=0x0,bingoBoxVideoArray[_0x203d4c][_0x199c('0x51')]=0x1,bingoBoxVideoArray[_0x203d4c][_0x199c('0x47')]['baseTexture']['resource'][_0x199c('0x36')][_0x199c('0x7d')]=0x0,bingoBoxVideoArray[_0x203d4c][_0x199c('0x47')][_0x199c('0x8d')]['resource'][_0x199c('0x36')]['play'](),bingoBoxVideoArray[_0x203d4c][_0x199c('0x47')][_0x199c('0x8d')]['resource']['source'][_0x199c('0x4e')]=!![]):spriteArray[_0x203d4c][_0x199c('0x51')]=0x1;if(useHighlight)graphicsArray[_0x203d4c][_0x199c('0x51')]=0x1;}else textArray[_0x203d4c][_0x199c('0x35')]=!![],previewSpriteArray[_0x203d4c][_0x199c('0x35')]=!![],textArray[_0x203d4c][_0x199c('0x51')]=0x1,previewSpriteArray[_0x203d4c][_0x199c('0x51')]=previewAlpha;}}}graphics[_0x199c('0x51')]=0x1,inAnimation=![],toggled=![],pendingResize&&(pendingResize=![],resize()),console[_0x199c('0x5c')](_0x199c('0xb3')+checkBingo());}if(curImage&&!curVideo&&selectedImage!=null&&shakyFrame<=shakyMaxFrames&&deltaScale==0x0){let _0x14eb0e=0x1,_0x4c9699=0x1;if(shakyFrame==0x0)selectedImage['x']+=0x1*_0x14eb0e,selectedImage['y']+=0x1*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x0*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x1)selectedImage['x']-=0x1*_0x14eb0e,selectedImage['y']-=0x2*_0x14eb0e,selectedImage['angle']-=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x2)selectedImage['x']-=0x3*_0x14eb0e,selectedImage['y']+=0x0*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x3)selectedImage['x']+=0x3*_0x14eb0e,selectedImage['y']+=0x2*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x0*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x4)selectedImage['x']+=0x1*_0x14eb0e,selectedImage['y']-=0x1*_0x14eb0e,selectedImage['angle']+=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x5)selectedImage['x']-=0x1*_0x14eb0e,selectedImage['y']+=0x2*_0x14eb0e,selectedImage['angle']-=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x6)selectedImage['x']-=0x3*_0x14eb0e,selectedImage['y']+=0x1*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x0*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x7)selectedImage['x']+=0x3*_0x14eb0e,selectedImage['y']+=0x1*_0x14eb0e,selectedImage[_0x199c('0x63')]-=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x8)selectedImage['x']-=0x1*_0x14eb0e,selectedImage['y']-=0x1*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x1*_0x4c9699;else{if(shakyFrame==shakyMaxFrames/0xa*0x9)selectedImage['x']+=0x1*_0x14eb0e,selectedImage['y']+=0x2*_0x14eb0e,selectedImage[_0x199c('0x63')]+=0x0*_0x4c9699;else shakyFrame==shakyMaxFrames/0xa*0xa&&(selectedImage['x']+=0x1*_0x14eb0e,selectedImage['y']-=0x2*_0x14eb0e,selectedImage[_0x199c('0x63')]-=0x0*_0x4c9699);}}}}}}}}}shakyFrame++,shakyFrame==shakyMaxFrames&&(curImage[_0x199c('0x9f')]=0x0,deltaScale=decreaseScale-increaseScale,originX=curImage['x'],originY=curImage['y'],deltaPosX=beforeX-curImage['x'],deltaPosY=beforeY-curImage['y'],deltaAlpha=0x1/decreaseMovementFrames,inAnimation=!![],currentMovementFrame=0x0,shakyFrame=0x0,curImage[_0x199c('0x63')]=0x0,curVideo=null,curImage=null,pendingResize&&(pendingResize=![],resize()));}if(curImage&&curVideo&&curVideo[_0x199c('0x7d')]>=curVideo[_0x199c('0xa3')]-0.001){let _0x12bd2b=curImage[_0x199c('0xa9')];if(playableArray[_0x12bd2b]){videoArray[_0x12bd2b]['alpha']=0x0;if(isDebug)console['log'](_0x199c('0xaa'));videoArray[_0x12bd2b][_0x199c('0x47')][_0x199c('0x8d')][_0x199c('0x56')][_0x199c('0x36')][_0x199c('0xf')](),document[_0x199c('0xa7')]('bingo-loading')['style'][_0x199c('0x55')]=_0x199c('0x2c');}curImage[_0x199c('0x9f')]=0x0,deltaScale=decreaseScale-increaseScale,originX=curImage['x'],originY=curImage['y'],deltaPosX=beforeX-curImage['x'],deltaPosY=beforeY-curImage['y'],deltaAlpha=0x1/decreaseMovementFrames,inAnimation=!![],currentMovementFrame=0x0,shakyFrame=0x0,curVideo=null,curImage=null;}}else{if(endPhase==0x0){if(currentMovementFrame<bingoFadeOutFrames){let _0x3c4b2d=Math[_0x199c('0x76')](Math['PI']/0x2*currentMovementFrame/bingoFadeOutFrames);for(let _0x5ae817=0x0;_0x5ae817<0x24;_0x5ae817++){playableArray[_0x5ae817]?(previewSpriteArray[_0x5ae817]['alpha']=0x0,textArray[_0x5ae817][_0x199c('0x51')]=0x0):(previewSpriteArray[_0x5ae817]['alpha']=(0x0-previewAlpha)*_0x3c4b2d+previewAlpha,textArray[_0x5ae817][_0x199c('0x51')]=(0x0-0x1)*_0x3c4b2d+0x1);}currentMovementFrame++;}else!itemsDestroyed&&(itemsDestroyed=!![],destroyAll()),threejsInit(),requestAnimationFrame(render),endPhase=0x1,currentMovementFrame=0x0;}else{if(endPhase==0x1){if(threejsRenderer){if(currentMovementFrame<radioFadeInFrames){let _0x388ceb=Math['sin'](Math['PI']/0x2*currentMovementFrame/radioFadeInFrames);document['getElementById'](_0x199c('0x9b'))[_0x199c('0xae')][_0x199c('0x78')]=_0x388ceb,currentMovementFrame++;}else endPhase=0x2,currentMovementFrame=0x0;}}else{if(endPhase==0x2){if(threejsRenderer){if(currentMovementFrame<waitRedirectFrames){let _0x526d49=Math[_0x199c('0x76')](Math['PI']/0x2*currentMovementFrame/waitRedirectFrames);currentMovementFrame++;}else endPhase=0x3,currentMovementFrame=0x0,redirect();}}}}}renderer['render'](stage),animateMode&&requestAnimationFrame(animate);}function checkBingo(){let _0x41a4c4=!![];for(let _0x5bf695=0x0;_0x5bf695<0x24;_0x5bf695++){if(playableArray[_0x5bf695]){if(!showArray[_0x5bf695])return _0x41a4c4=![],_0x41a4c4;}}if(_0x41a4c4){bingoMatched=!![],currentMovementFrame=0x0,stage['removeChild'](graphics),spriteDestroyed=!![];for(let _0x58df33=0x0;_0x58df33<0x24;_0x58df33++){stage[_0x199c('0xad')](spriteArray[_0x58df33]),stage[_0x199c('0xad')](videoArray[_0x58df33]),spriteArray[_0x58df33][_0x199c('0xb5')]({'options':!![]});if(videoArray[_0x58df33])videoArray[_0x58df33][_0x199c('0xb5')]({'options':!![]});}}return _0x41a4c4;}function destroyAll(){for(let _0x24752f=0x0;_0x24752f<0x24;_0x24752f++){stage['removeChild'](previewSpriteArray[_0x24752f]),stage['removeChild'](textArray[_0x24752f]),textArray[_0x24752f][_0x199c('0xb5')]({'options':!![]}),previewSpriteArray[_0x24752f][_0x199c('0xb5')]({'options':!![]});}}$(_0x199c('0xb'))['on'](_0x199c('0x1d'),function(){document[_0x199c('0xa7')](_0x199c('0x98'))['style'][_0x199c('0x11')]='auto';});function redirect(){window[_0x199c('0x4f')][_0x199c('0x39')](_0x199c('0xc'));}{var camPosX=0x0,camPosY=0x0,camPosZ=0x4,fov=0x1e,aspect=window['innerWidth']/window[_0x199c('0xe')],near=0.25,far=0x14;}var useControls=!![];function threejsInit(){container=document['querySelector']('#threejs-background');showStats&&(stats=new _0xd7f72e(),stats[_0x199c('0x27')](0x0),document[_0x199c('0x52')][_0x199c('0x60')](stats[_0x199c('0x6f')]));scene=new _0xc98398[(_0x199c('0x69'))]();{aspect=window[_0x199c('0x34')]/window['innerHeight'],camera=new _0xc98398[(_0x199c('0x15'))](fov,aspect,near,far),camera[_0x199c('0x82')][_0x199c('0x6e')](camPosX,camPosY,camPosZ),camera[_0x199c('0x4a')]();}new RGBELoader()[_0x199c('0x3')](_0xc98398[_0x199c('0x22')])[_0x199c('0x5f')](_0x199c('0xb6'),function(_0x37b6e3){var _0x512f1d=_0x3f5f10[_0x199c('0x65')](_0x37b6e3)[_0x199c('0x47')];scene[_0x199c('0x20')]=_0x512f1d,_0x37b6e3[_0x199c('0x25')](),_0x3f5f10[_0x199c('0x25')]();if(isDebug)console[_0x199c('0x5c')](_0x199c('0x80'));var _0x295bdd=new GLTFLoader();_0x295bdd[_0x199c('0x5f')](_0x199c('0x6b'),function(_0x3de194){_0x3de194[_0x199c('0x33')][_0x199c('0x2')](function(_0xa24f06){if(_0xa24f06[_0x199c('0x95')]){}});var _0x1c2695=0x5;_0x3de194['scene'][_0x199c('0xb0')][0x0][_0x199c('0x6c')]['x']=_0x1c2695,_0x3de194[_0x199c('0x33')][_0x199c('0xb0')][0x0][_0x199c('0x6c')]['y']=_0x1c2695,_0x3de194[_0x199c('0x33')][_0x199c('0xb0')][0x0]['scale']['z']=_0x1c2695,_0x3de194[_0x199c('0x33')][_0x199c('0x7a')]['z']=-0.1,scene[_0x199c('0xab')](_0x3de194[_0x199c('0x33')]),mercuryObject=_0x3de194[_0x199c('0x33')][_0x199c('0xb0')][0x0],mercuryObject[_0x199c('0x77')][_0x199c('0x82')]['x']=-0.3;if(window[_0x199c('0xe')]>window[_0x199c('0x34')])mercuryObject[_0x199c('0x77')][_0x199c('0x82')]['y']=-0.2;else mercuryObject['parent'][_0x199c('0x82')]['y']=0x0;if(isDebug)console[_0x199c('0x5c')](mercuryObject);});});{threejsRenderer=new _0xc98398[(_0x199c('0x43'))]({'antialias':!![],'alpha':!![]}),threejsRenderer[_0x199c('0x8c')](window['devicePixelRatio']),threejsRenderer[_0x199c('0xa')](window[_0x199c('0x34')],window[_0x199c('0xe')]),threejsRenderer[_0x199c('0x30')]=_0xc98398['ACESFilmicToneMapping'],threejsRenderer[_0x199c('0x94')]=0x1,threejsRenderer[_0x199c('0x32')]=_0xc98398[_0x199c('0x75')],threejsElement=container[_0x199c('0x60')](threejsRenderer[_0x199c('0x79')]);var _0x3f5f10=new _0xc98398[(_0x199c('0x7c'))](threejsRenderer);_0x3f5f10[_0x199c('0x58')]();}if(useControls){controls=new OrbitControls(camera,threejsRenderer[_0x199c('0x79')]),controls[_0x199c('0x1a')]=0x6;isDebug?controls[_0x199c('0xa0')]=0x14:controls['maxDistance']=0xb;controls[_0x199c('0x2b')]={'LEFT':_0xc98398[_0x199c('0xa4')][_0x199c('0x1e')],'MIDDLE':_0xc98398['MOUSE'][_0x199c('0x26')]},controls[_0x199c('0x81')]={'ONE':_0xc98398[_0x199c('0x19')]['DOLLY_PAN'],'TWO':_0xc98398[_0x199c('0x19')]['DOLLY_PAN']},controls['enablePan']=!![],controls[_0x199c('0x18')]=!![],controls[_0x199c('0x66')]=!![],controls[_0x199c('0x88')][_0x199c('0x6e')](0x0,0x0,-0.2);var _0x4ba0dc=new _0xc98398[(_0x199c('0x6a'))](-0x2,-0x1,-0.2),_0xc019e7=new _0xc98398['Vector3'](0x2,0x1,-0.2),_0x38ac65=new _0xc98398[(_0x199c('0x6a'))]();controls[_0x199c('0x93')](_0x199c('0x46'),function(){_0x38ac65['copy'](controls[_0x199c('0x88')]),controls[_0x199c('0x88')][_0x199c('0x37')](_0x4ba0dc,_0xc019e7),_0x38ac65[_0x199c('0x2f')](controls[_0x199c('0x88')]),camera['position'][_0x199c('0x2f')](_0x38ac65);}),controls[_0x199c('0x1b')]();}}function threejsResize(){console[_0x199c('0x5c')](_0x199c('0x3f'));let _0x1572d3=window[_0x199c('0x34')]/window['innerHeight'];camera[_0x199c('0xaf')]=_0x1572d3,camera[_0x199c('0x4a')](),threejsRenderer[_0x199c('0xa')](window[_0x199c('0x34')],window['innerHeight']);}function render(_0x1d1d18){if(showStats)stats[_0x199c('0x54')]();_0x1d1d18*=0.001;try{mercuryObject['rotation']['y']=1.2*_0x1d1d18*0.5+0x2;}catch(_0x108a85){_0x108a85 instanceof TypeError?console['log'](_0x199c('0x9d')):console['log'](_0x108a85);}threejsRenderer[_0x199c('0x5d')](scene,camera);if(showStats)stats[_0x199c('0xa2')]();requestAnimationFrame(render);}
+import * as THREE from 'https://unpkg.com/three@0.119.1/build/three.module.js';
+import { OrbitControls } from 'https://unpkg.com/three@0.119.1/examples/jsm/controls/OrbitControls.js';
+import { GLTFLoader } from 'https://unpkg.com/three@0.119.1/examples/jsm/loaders/GLTFLoader.js';
+import { RGBELoader } from 'https://unpkg.com/three@0.119.1/examples/jsm/loaders/RGBELoader.js';
+import Stats from 'https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js';
+
+var container, controls, threejsElement;
+var camera, scene, threejsRenderer;
+let mercuryObject;
+var stats;
+var showStats = false;
+
+const canvas = document.getElementById('bingocanvas');
+let curVideo = null;
+let isDebug = false;
+let debugElement = null;
+let usePreview = true;
+let previewAlpha = 0.6;
+let isDark = true;
+let textOnTopLandscape = true;
+
+let bingoMatched = false;
+let bingoFadeOutFrames = 150;
+let spriteDestroyed = false;
+let itemsDestroyed = false;
+let endPhase = 0;
+let radioFadeInFrames = 300;
+let waitRedirectFrames = 150;
+
+let restoreImage = true;
+let disableUnclickable = false;
+let playVideoInBingoBox = true;
+let loadedVideos = 0;
+
+let strokeWidth = 1;
+let strokeColor, fontColor, rectColor;
+let screenColor, deltaAlpha;
+if(isDark)
+{
+  strokeColor = 0x000000;
+  fontColor = 0xffffff;
+  rectColor = 0xffffff;
+}
+else
+{
+  strokeColor = 0xffffff;
+  fontColor = 0x484848;
+  //fontColor = 0x000000;
+  rectColor = 0xeeeeee;
+}
+if(false){
+  strokeColor = 0xffffff;
+  //fontColor = 0x404040;
+  fontColor = 0x000000;
+  rectColor = 0xeeeeee;
+}
+
+//let highlightColor = 0x479ad5;
+//let highlightColor = 0x484848;
+let highlightColor = 0xeeeeee;
+
+let fontSizeOffset = -12;
+
+let autoclick = true;
+let animateMode = false;
+let verticalMode; //boolean
+let xOffset = 0;
+let yOffset = 0;
+// let screenWidth = window.innerWidth;
+// let screenHeight = window.innerHeight;
+let viewportWidth = document.documentElement.clientWidth;
+let viewportHeight = document.documentElement.clientHeight;
+let screenWidth = window.screen.width;
+let screenHeight = window.screen.height;
+let innerWidth = window.innerWidth;
+let innerHeight = window.innerHeight;
+let rectLength;
+let spriteArray = [];
+let previewSpriteArray = [];
+let videoArray = [];
+let bingoBoxVideoArray = [];
+let xLoc = [];
+let yLoc = [];
+//let rectArray = [];
+let showArray = [];
+let textArray = [];
+let bingoArray = [
+  120, 119, 95, 109, 99, 18,
+  113, 96, 91, 115, 97, 112,
+  108, 90, 116, 114, 94, 103,
+  102, 98, 110, 107, 89, 92,
+  117, 93, 104, 87, 88, 85,
+  101, 100, 105, 106, 86, 111
+];
+let clickableArray = [
+  1, 1, 0, 1, 1, 1,
+  1, 1, 1, 1, 1, 0,
+  1, 0, 1, 1, 1, 1,
+  1, 1, 1, 0, 1, 1,
+  0, 1, 1, 1, 1, 1,
+  0, 1, 1, 1, 1, 1
+];
+let playableArray = [
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0
+];
+
+let videoEndTimeArray = [
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0,
+  0, 0, 0, 0, 1, 0
+];
+let graphicsArray = [];
+let useHighlight = true;
+
+let beforeX = 0;
+let beforeY = 0;
+
+let decreaseScale = 0;
+let increaseScale = 0;
+let deltaScale = 0;
+let deltaPosX = 0;
+let deltaPosY = 0;
+let selectedImage = null;
+let curImage = null;
+
+let toggled = false;
+let inAnimation = false;
+let pendingResize = false;
+let isLoaded = false;
+let loadedCnt = 0;
+let videoLoaded = [];
+
+let increaseMovementFrames = 15;
+let decreaseMovementFrames = 15;
+let currentMovementFrame = 0;
+let shakyFrame = 0;
+let shakyMaxFrames =20;
+
+let originX = 0;
+let originY = 0;
+
+
+
+window.mobileCheck = function() {
+  let check = false;
+  (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+  return check;
+};
+
+let isMobileEnv = window.mobileCheck();
+if(!isMobileEnv)
+{
+  fontSizeOffset = -4;
+}
+
+
+//let strokeColor = 0x8A8A8A; //grey
+//let fontColor = 0xeeeeee;
+
+
+let textStyle = new PIXI.TextStyle({
+  fontFamily: ['-apple-system','BlinkMacSystemFont',"Segoe UI",'Roboto',"Helvetica Neue",'Arial',"Noto Sans",'sans-serif',"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"],
+  fontSize: 36,
+  //fontStyle: 'italic',
+  //fontWeight: 'lighter',
+  fontWeight: '400',
+  fill: fontColor,
+  //stroke: '#4a1850',
+  //strokeThickness: 5,
+  //dropShadow: true,
+  //dropShadowColor: '#000000',
+  //dropShadowBlur: 4,
+  //dropShadowAngle: Math.PI / 6,
+  //dropShadowDistance: 6,
+  //wordWrap: true,
+  //wordWrapWidth: 440,
+});
+
+
+if(isDebug)
+{
+  debugElement = document.getElementsByClassName('debug-text')[0];
+}
+else
+{
+  for(let i=0;i<document.getElementsByClassName('debug-text').length;i++)
+  {
+    document.getElementsByClassName('debug-text')[i].style.display = 'none';
+  }
+}
+
+const stage = new PIXI.Container();
+const loader = PIXI.Loader.shared;
+stage.sortableChildren = true;
+
+let graphics = new PIXI.Graphics();
+let renderWidth = viewportWidth;
+let renderHeight = viewportHeight;
+
+if(!document.getElementById('mercury-play-back'))
+{
+  let span = document.createElement("SPAN");
+  span.setAttribute("id", "mercury-play-back");
+  span.innerHTML = 'Mercury Play Back';
+  document.getElementById('bingo').appendChild(span);
+}
+
+if(isDebug)
+{
+  console.log('viewportWidth: ' +viewportWidth);
+  console.log('viewportHeight: ' +viewportHeight);
+  console.log('screenWidth: ' +screenWidth);
+  console.log('screenHeight: ' +screenHeight);
+  debugElement.innerHTML = viewportWidth.toString() +', '+viewportHeight.toString()+', '+screenWidth.toString() +', '+screenHeight.toString()+', '+window.innerWidth.toString() +', '+window.innerHeight.toString();
+}
+
+//SETUP
+if(viewportWidth<viewportHeight)
+{
+  verticalMode = true;
+  if(window.mobileCheck())
+  {
+    rectLength = screenWidth;
+    renderWidth = screenWidth;
+  }
+  else
+  {
+    rectLength = viewportWidth;
+    renderWidth = viewportWidth;
+  }
+
+  
+  xOffset = 0;
+  yOffset = (viewportHeight - rectLength) / 2;
+
+  if(document.getElementById('mercury-play-back'))
+  {
+    if(yOffset >=80)
+    {
+      yOffset += yOffset/3;
+      document.getElementById('mercury-play-back').style.display = 'block';
+      document.getElementById('mercury-play-back').style.left = (rectLength/2).toString()+'px';
+      document.getElementById('mercury-play-back').style.top = (yOffset/2).toString()+'px';
+    }
+    else
+    {
+      document.getElementById('mercury-play-back').style.display = 'none';
+    }
+    /*
+    if(!window.mobileCheck())
+    {
+      document.getElementById('mercury-play-back').style.fontSize = '200%';
+    }
+    */
+  }
+  
+}
+else
+{
+  verticalMode = false;
+  rectLength = innerHeight;
+  xOffset = (viewportWidth - rectLength) / 2;
+  yOffset = 0;
+  renderHeight = innerHeight;
+  if(document.getElementById('mercury-play-back'))
+  {
+    if(textOnTopLandscape)
+    {
+      if(innerHeight>400)
+      {
+        yOffset += rectLength/6;
+        document.getElementById('mercury-play-back').style.display = 'block';
+        document.getElementById('mercury-play-back').style.top = (yOffset/2).toString()+'px';
+        document.getElementById('mercury-play-back').style.left = '50%';
+        rectLength -= yOffset * 3 / 2;
+        xOffset = (viewportWidth - rectLength) / 2;
+      }
+      else
+      {
+        document.getElementById('mercury-play-back').style.display = 'none';
+      }
+    }
+    else
+    {
+      if(xOffset >=150)
+      {
+        xOffset += xOffset/1.5;
+        document.getElementById('mercury-play-back').style.display = 'block';
+        document.getElementById('mercury-play-back').style.top = (rectLength/2).toString()+'px';
+        document.getElementById('mercury-play-back').style.left = (xOffset/2).toString()+'px';
+      }
+      else
+      {
+        document.getElementById('mercury-play-back').style.display = 'none';
+      }
+    }
+    
+  }
+  
+}
+
+document.getElementById('bingo-loading').style.left = (xOffset + rectLength / 2).toString()+'px';
+document.getElementById('bingo-loading').style.top = (yOffset + rectLength / 2).toString()+'px';
+
+window.onorientationchange = function() { 
+
+  let htmlElement =  $("html");
+  let bodyElement = $("body");
+
+  if($(window).innerWidth() < $(window).innerHeight()) {//landscape to portrait
+      htmlElement.css("overflow-x","hidden");
+      bodyElement.css("overflow-x", "hidden");
+   } else {//portrait to landscape
+      htmlElement.css("overflow","auto");
+      bodyElement.css("overflow", "auto");
+      //below 2 lines makes the UI not shrink in portrait mode 
+      htmlElement.css("overflow-x","auto");
+      bodyElement.css("overflow-x", "auto");
+   }
+
+}
+
+let type = "WebGL"
+if(!PIXI.utils.isWebGLSupported()){
+    type = "canvas"
+}
+
+if(isDark)
+{
+  screenColor = 0x000000;
+}
+else
+{
+  screenColor = 0xffffff;
+}
+
+const renderer = new PIXI.Renderer({
+  view: canvas,
+  width: renderWidth,
+  height: renderHeight,
+  autoDensity: true,
+  backgroundColor: screenColor,
+  resolution: window.devicePixelRatio
+});
+
+window.addEventListener('resize', resize);
+//window.addEventListener('deviceorientation', resize);
+window.addEventListener('orientationchange', resize);
+
+/*
+window.WebFontConfig = {
+  google: {
+      families: ['Noto Sans', 'Noto Sans CJK KR'],
+  },
+
+  active() {
+      fontinit();
+  },
+};
+(function() {
+  const wf = document.createElement('script');
+  wf.src = `${document.location.protocol === 'https:' ? 'https' : 'http'
+  }://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js`;
+  wf.type = 'text/javascript';
+  wf.async = 'true';
+  const s = document.getElementsByTagName('script')[0];
+  s.parentNode.insertBefore(wf, s);
+}());
+function fontinit() {
+  // create some white text using the Snippet webfont
+  const textSample = new PIXI.Text('Pixi.js text using the\ncustom "Snippet" Webfont', {
+      fontFamily: 'Noto Sans',
+      fontSize: 50,
+      fill: 'white',
+      align: 'left',
+  });
+  textSample.position.set(50, 200);
+  stage.addChild(textSample);
+}
+*/
+
+
+
+
+
+let pathArray = [];
+let previewArray = [];
+/*
+for(let i=120;i>=85;i--)
+{
+    pathArray.push("images/" + i.toString() + "/main.jpg");
+}
+*/
+for(let i=0;i<36;i++)
+{
+  let str = (85+i).toString();
+  if(str.length>2) str = str.substring(str.length-2);
+  pathArray[i] = "bingoimages/" + str + ".jpg";
+  if(i!=5&&i!=10&&i!=16&&i!=22&&i!=27&&i!=32) previewArray.push("bingoimages_preview/" + str + ".jpg");
+  if(useHighlight && playableArray[i])graphicsArray[i] = new PIXI.Graphics();
+  //pathArray.push("bingoimages/" + str + ".jpg");
+}
+
+loader.add(pathArray).add(previewArray).add("bingoimages_preview/blank.jpg").load(setup);
+
+
+
+
+
+
+
+
+
+
+
+function setup() {
+  for(let i=0;i<36;i++)
+  {
+    bingoArray[i]-=85;
+  }
+  /*
+  for(let i=120;i>=85;i--)
+  {
+    
+    spriteArray.push(new PIXI.Sprite(
+        loader.resources["images/"+i.toString()+"/main.jpg"].texture
+      ));
+    let str = i.toString();
+    if(str.length>2) str = str.substring(str.length-2);
+    textArray.push(new PIXI.Text(str));
+    
+    //console.log(str);
+  }
+  */
+  for(let k=0;k<36;k++)
+  {
+    let i = bingoArray[k];
+    let str = (i+85).toString();
+
+    if(str.length>2) str = str.substring(str.length-2);
+    /*
+    try{
+      spriteArray.push(new PIXI.Sprite(
+        loader.resources["bingoimages/" + str + ".jpg"].texture
+      ));
+    }
+    catch (e) {
+      if (e instanceof TypeError) {
+          //printError(e, true);
+          console.log('type error '+str);
+      } else {
+          //printError(e, false);
+          console.log(e);
+      }
+    }
+    */
+    try{
+      spriteArray[k] = new PIXI.Sprite(
+        loader.resources["bingoimages/" + str + ".jpg"].texture
+      );
+      if(clickableArray[k]==1)
+      {
+        previewSpriteArray[k] = new PIXI.Sprite(
+          loader.resources["bingoimages_preview/" + str + ".jpg"].texture
+        );
+      }
+      else
+      {
+        previewSpriteArray[k] = new PIXI.Sprite(
+          loader.resources["bingoimages_preview/blank.jpg"].texture
+        );
+      }
+      
+      if(playableArray[k])
+      {
+        if(isMobileEnv)
+        {
+          videoArray[k] =  new PIXI.Sprite(PIXI.Texture.from("videos/"+str+"_low.mp4"));
+        }
+        else
+        {
+          videoArray[k] =  new PIXI.Sprite(PIXI.Texture.from("videos/"+str+".mp4"));
+        }
+
+        bingoBoxVideoArray[k] = new PIXI.Sprite(PIXI.Texture.from("videos/"+str+"_low.mp4"));
+        
+      }
+    }
+    catch (e) {
+      if (e instanceof TypeError) {
+          //printError(e, true);
+          console.log('type error '+str);
+      } else {
+          //printError(e, false);
+          console.log(e);
+      }
+    }
+    
+
+    textArray[k] = new PIXI.Text(str);
+    
+    //console.log(str);
+  }
+  if(rectLength>=800)
+  {
+    strokeWidth = 5;
+    textStyle.fontSize = 36+fontSizeOffset;
+  }
+  else if(rectLength>=600)
+  {
+    strokeWidth = 4;
+    textStyle.fontSize = 32+fontSizeOffset;
+  }
+  else if(rectLength>=400)
+  {
+    strokeWidth = 3;
+    textStyle.fontSize = 28+fontSizeOffset;
+  }
+  else if(rectLength>=250)
+  {
+    strokeWidth = 2;
+    textStyle.fontSize = 24+fontSizeOffset;
+  }
+  else
+  {
+    strokeWidth = 1;
+    textStyle.fontSize = 20+fontSizeOffset;
+  }
+
+  
+  strokeWidth = 1;
+  
+  graphics.lineStyle(strokeWidth, strokeColor, 1, 0);
+  graphics.beginFill(rectColor);
+  graphics.zIndex = -1;
+  for(let i=0;i<36;i++)
+  {
+    //let i = bingoArray[k];
+    xLoc[i] = xOffset + (rectLength*(i%6)/6)+rectLength/12;
+    yLoc[i] = yOffset + (rectLength*parseInt(i/6)/6)+rectLength/12;
+    spriteArray[i].x= xLoc[i];
+    spriteArray[i].y= yLoc[i];
+    spriteArray[i].width = rectLength/6 - 2*strokeWidth;
+    spriteArray[i].height = rectLength/6 - 2*strokeWidth;
+    spriteArray[i].num = i;
+
+    spriteArray[i].interactive = true;
+    spriteArray[i].anchor.set(0.5);
+    spriteArray[i].on('pointerdown', onClick);
+    showArray[i] = false;
+    spriteArray[i].alpha = 0;
+
+    if(usePreview)
+    {
+      //graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+      previewSpriteArray[i].x= xLoc[i];
+      previewSpriteArray[i].y= yLoc[i];
+      previewSpriteArray[i].width = rectLength/6 - 2*strokeWidth;
+      previewSpriteArray[i].height = rectLength/6 - 2*strokeWidth;
+      previewSpriteArray[i].num = i;
+      previewSpriteArray[i].zIndex = -0.8;
+      previewSpriteArray[i].alpha = previewAlpha;
+
+      previewSpriteArray[i].anchor.set(0.5);
+      stage.addChild(previewSpriteArray[i]);
+    }
+    else
+    {
+      graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+    }
+    
+    //graphics.on('pointerdown', rectClick);
+    /*
+    rectArray[i] = new PIXI.Graphics();
+    rectArray[i].lineStyle(strokeWidth, strokeColor, 1, 0);
+    rectArray[i].beginFill(rectColor);
+    rectArray[i].drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+    rectArray[i].endFill();
+    */
+    //rectArray[i].zIndex = -1;
+    //rectArray[i].lineStyle(alignment = 0, color = 0xf30149);
+    //rectArray[i].lineStyle.color = 0xf30149;
+    textArray[i].x = xLoc[i];
+    textArray[i].y = yLoc[i];
+    textArray[i].anchor.set(0.5);
+    textArray[i].style = textStyle;
+    textArray[i].zIndex = -0.5;
+    stage.addChild(textArray[i]);
+    stage.addChild(spriteArray[i]);
+    if(playableArray[i])
+    {
+      videoArray[i].x = xOffset;
+      videoArray[i].y = yOffset;
+      videoArray[i].width = rectLength;
+      videoArray[i].height = rectLength;
+      videoArray[i].zIndex = 1;
+      videoArray[i].interactive;
+      stage.addChild(videoArray[i]);
+      videoArray[i].texture.baseTexture.resource.source.pause();
+      videoLoaded[i] = false;
+      spriteArray[i].video = videoArray[i];
+      videoArray[i].alpha=0;
+      //videoArray[i].texture.baseTexture.resource.source.onloadstart = function(){ console.log('loading')};
+      videoArray[i].texture.baseTexture.resource.source.oncanplay = function()
+      { 
+        videoLoaded[i] = true; document.getElementById('bingo-loading').style.display = 'none'; 
+        //console.log('loaded');
+        loadedVideos++;
+        if(loadedVideos == 6)
+        if(isDebug) debugElement.innerHTML = 'All Loaded.';
+      };
+
+      videoArray[i].texture.baseTexture.resource.source.setAttribute('muted','true');
+
+      //console.log(videoArray[i].texture.baseTexture.resource.source);
+
+      
+      
+      document.getElementById('bingo-loading').style.display = 'none';
+      // paused, currentTime, duration
+      // videoArray[i].texture.baseTexture.resource.source.addEventListener('loadstart', function (event) {
+      //     console.log('loading');
+      //   });
+      // videoArray[i].texture.baseTexture.resource.source.on('loadstart', function (event) {
+      //   console.log('loading');
+      // });
+      //videoArray[i].loop = true;
+
+      if(useHighlight)
+      {
+        graphicsArray[i].lineStyle(strokeWidth * 2, highlightColor, 1, 0);
+        graphicsArray[i].beginFill(0xffffff);
+        graphicsArray[i].drawRect(xOffset + (rectLength*(i%6)/6) - strokeWidth, yOffset + (rectLength*parseInt(i/6)/6) - strokeWidth, rectLength/6 + 2 * strokeWidth, rectLength/6 + 2 * strokeWidth);
+        graphicsArray[i].zIndex = -0.5;
+        graphicsArray[i].alpha=0;
+        stage.addChild(graphicsArray[i]);
+        graphicsArray[i].endFill();
+      }
+
+      if(playVideoInBingoBox)
+      {
+        bingoBoxVideoArray[i].x= xLoc[i];
+        bingoBoxVideoArray[i].y= yLoc[i];
+        bingoBoxVideoArray[i].width = rectLength/6 - 2*strokeWidth;
+        bingoBoxVideoArray[i].height = rectLength/6 - 2*strokeWidth;
+        bingoBoxVideoArray[i].num = i;
+
+        bingoBoxVideoArray[i].interactive = false;
+        bingoBoxVideoArray[i].anchor.set(0.5);
+        bingoBoxVideoArray[i].on('pointerdown', onClick);
+        bingoBoxVideoArray[i].alpha = 0;
+        bingoBoxVideoArray[i].texture.baseTexture.resource.source.currentTime = 0;
+        bingoBoxVideoArray[i].texture.baseTexture.resource.source.play();
+        bingoBoxVideoArray[i].texture.baseTexture.resource.source.loop = true;
+        stage.addChild(bingoBoxVideoArray[i]);
+      }
+      
+    }
+    loadedCnt++;
+    if(loadedCnt==36)
+    {
+      isLoaded = true;
+      if(pendingResize)
+      {
+        pendingResize = false;
+        resize();
+      }
+    }
+  }
+  stage.addChild(graphics);
+  graphics.endFill();
+
+  if(spriteArray[0]!=null)
+  {
+    decreaseScale = spriteArray[0].scale.x;
+    let temp = spriteArray[0].width;
+    spriteArray[0].width = rectLength/6;
+    increaseScale = spriteArray[0].scale.x * 6;
+    spriteArray[0].width = temp;
+  }
+
+  function onClick(p) {
+    if(bingoMatched) return;
+    //console.log("This before: "+this.zIndex);
+    //console.log('Image '+k+' is clicked');
+    if(toggled == false && inAnimation == false)
+    {
+      
+      if(this.alpha!=0)
+      {
+        //when sprite is showing, and bingo number is hidden
+
+        if(disableUnclickable && clickableArray[this.num]==0) return;
+        beforeX = this.x;
+        beforeY = this.y;
+        //this.x = xOffset + rectLength/2;
+        //this.y = yOffset + rectLength/2;
+        //console.log("Scale: "+this.scale.x);
+        //this.scale.x *= 6;
+        //this.scale.y *= 6;
+        for(let i=0;i<36;i++)
+        {
+          //let i = bingoArray[k];
+          //console.log(i+" before "+spriteArray[i].zIndex);
+          stage.setChildIndex(spriteArray[i], 0);
+          //spriteArray[i].zIndex = 0;
+          //console.log(i+" before "+spriteArray[i].zIndex);
+        }
+        this.zIndex = 1;
+        //console.log("This after: "+this.zIndex);
+        selectedImage = this;
+        /*
+        deltaScale = (increaseScale - decreaseScale) / increaseMovementFrames;
+        deltaPosX = (xOffset + rectLength/2 - this.x) / increaseMovementFrames;
+        deltaPosY = (yOffset + rectLength/2 - this.y) / increaseMovementFrames;
+        */
+        deltaScale = (increaseScale - decreaseScale);
+        originX = this.x;
+        originY = this.y;
+        deltaPosX = (xOffset + rectLength/2 - this.x);
+        deltaPosY = (yOffset + rectLength/2 - this.y);
+        deltaAlpha = -1.0 / increaseMovementFrames;
+        inAnimation = true;
+        currentMovementFrame = 0;
+        shakyFrame = 0;
+        selectedImage.angle = 0;
+        curImage = selectedImage;
+        if(playVideoInBingoBox)
+        {
+          //bingoBoxVideoArray[n].alpha = 0;
+          //stage.removeChild(bingoBoxVideoArray[n]);
+        }
+        
+      }
+      else
+      {
+        //when sprite is hidden, and bingo number is showing
+        this.alpha = 1;
+        let n = -1;
+        for(let i = 0;i<36;i++)
+        {
+          //let i = bingoArray[k];
+          if(spriteArray[i] == this)
+          {
+            //console.log('this is '+ i);
+            n = i;
+            break;
+          }
+        }
+        showArray[n] = true;
+        textArray[n].visible = false;
+        previewSpriteArray[n].visible = false;
+        if(useHighlight && playableArray[n]) graphicsArray[n].alpha=1;
+
+        if(autoclick == true)
+        {
+          //when sprite is showing, and bingo number is hidden
+
+          if(disableUnclickable && clickableArray[this.num]==0) return;
+          beforeX = this.x;
+          beforeY = this.y;
+          //this.x = xOffset + rectLength/2;
+          //this.y = yOffset + rectLength/2;
+          //console.log("Scale: "+this.scale.x);
+          //this.scale.x *= 6;
+          //this.scale.y *= 6;
+          for(let i=0;i<36;i++)
+          {
+            //let i = bingoArray[k];
+            //console.log(i+" before "+spriteArray[i].zIndex);
+            stage.setChildIndex(spriteArray[i], 0);
+            //spriteArray[i].zIndex = 0;
+            //console.log(i+" before "+spriteArray[i].zIndex);
+          }
+          this.zIndex = 1;
+          //console.log("This after: "+this.zIndex);
+          selectedImage = this;
+          /*
+          deltaScale = (increaseScale - decreaseScale) / increaseMovementFrames;
+          deltaPosX = (xOffset + rectLength/2 - this.x) / increaseMovementFrames;
+          deltaPosY = (yOffset + rectLength/2 - this.y) / increaseMovementFrames;
+          */
+          deltaScale = (increaseScale - decreaseScale);
+          originX = this.x;
+          originY = this.y;
+          deltaPosX = (xOffset + rectLength/2 - this.x);
+          deltaPosY = (yOffset + rectLength/2 - this.y);
+          deltaAlpha = -1.0 / increaseMovementFrames;
+          inAnimation = true;
+          currentMovementFrame = 0;
+          shakyFrame = 0;
+          selectedImage.angle = 0;
+          curImage = selectedImage;
+          if(playVideoInBingoBox)
+          {
+            //bingoBoxVideoArray[n].alpha = 0;
+            //stage.removeChild(bingoBoxVideoArray[n]);
+          }
+          
+        }
+      }
+    }
+    else if(toggled == true && inAnimation == false)
+    {
+      //when image is toggled(selected) and size is maximized
+      //minimize size
+      selectedImage = this;
+      let k = selectedImage.num;
+      // TODO
+      // IF PLAYABLE, STOP AND HIDE
+      if(playableArray[k])
+      {
+        videoArray[k].alpha = 0;
+        //stage.removeChild(videoArray[k]);
+        videoArray[k].texture.baseTexture.resource.source.pause();
+        if(isDebug) console.log('video Paused');
+        //videoLoaded = false;
+        document.getElementById('bingo-loading').style.display = 'none';
+      }
+ 
+      //this.x = beforeX;
+      //this.y = beforeY;
+      //this.scale.x /= 6;
+      //this.scale.y /= 6;
+      this.zIndex = 0;
+      /*
+      deltaScale = (decreaseScale - increaseScale) / decreaseMovementFrames;
+      deltaPosX = (beforeX - this.x) / decreaseMovementFrames;
+      deltaPosY = (beforeY - this.y) / decreaseMovementFrames;
+      */
+      deltaScale = (decreaseScale - increaseScale);
+      originX = this.x;
+      originY = this.y;
+      deltaPosX = (beforeX - this.x);
+      deltaPosY = (beforeY - this.y);
+      deltaAlpha = 1.0 / decreaseMovementFrames;
+      inAnimation = true;
+      currentMovementFrame = 0;
+      shakyFrame = 0;
+      selectedImage.angle = 0;
+      curImage = null;
+      curVideo = null;
+    }
+    
+    if(!animateMode)
+    {
+      renderer.render(stage);
+    }
+    
+  }
+
+
+  renderer.render(stage);
+  
+
+}
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+
+function resize(){
+  //if(bingoMatched) return;
+  if(inAnimation||isLoaded==false)
+  {
+    pendingResize = true;
+    return;
+  }
+  // screenWidth = window.innerWidth;
+  // screenHeight = window.innerHeight;
+  viewportWidth = document.documentElement.clientWidth;
+  viewportHeight = document.documentElement.clientHeight;
+  screenWidth = window.screen.width;
+  screenHeight = window.screen.height;
+  innerWidth = window.innerWidth;
+  innerHeight = window.innerHeight;
+  if(isDebug)
+  {
+    console.log('viewportWidth: ' +viewportWidth);
+    console.log('viewportHeight: ' +viewportHeight);
+    console.log('screenWidth: ' +screenWidth);
+    console.log('screenHeight: ' +screenHeight);
+    debugElement.innerHTML = viewportWidth.toString() +', '+viewportHeight.toString()+', '+screenWidth.toString() +', '+screenHeight.toString()+', '+window.innerWidth.toString() +', '+window.innerHeight.toString();
+  }
+  
+
+  //document.getElementById('bingo').style.height = screenHeight;
+  //document.getElementById('bingo').style.width = screenWidth;
+
+  if(viewportWidth<viewportHeight)
+  {
+    // Portrait
+    verticalMode = true;
+    if(window.mobileCheck())
+    {
+      rectLength = screenWidth;
+      renderWidth = screenWidth;
+    }
+    else
+    {
+      rectLength = viewportWidth;
+      renderWidth = viewportWidth;
+    }
+    xOffset = 0;
+    yOffset = (viewportHeight - rectLength) / 2;
+
+    if(document.getElementById('mercury-play-back'))
+    {
+      if(yOffset >=80)
+      {
+        yOffset += yOffset/3;
+        document.getElementById('mercury-play-back').style.display = 'block';
+        document.getElementById('mercury-play-back').style.left = (rectLength/2).toString()+'px';
+        document.getElementById('mercury-play-back').style.top = (yOffset/2).toString()+'px';
+      }
+      else
+      {
+        document.getElementById('mercury-play-back').style.display = 'none';
+      }
+    }
+    
+
+    renderer.resize(renderWidth, viewportHeight);
+  }
+  else
+  {
+    // Landscape
+    verticalMode = false;
+    rectLength = innerHeight;
+    xOffset = (viewportWidth - rectLength) / 2;
+    yOffset = 0;
+
+    if(document.getElementById('mercury-play-back'))
+    {
+      if(textOnTopLandscape)
+      {
+        if(innerHeight>400)
+        {
+          yOffset += rectLength/6;
+          document.getElementById('mercury-play-back').style.display = 'block';
+          document.getElementById('mercury-play-back').style.top = (yOffset/2).toString()+'px';
+          document.getElementById('mercury-play-back').style.left = '50%';
+          rectLength -= yOffset * 3 / 2;
+          xOffset = (viewportWidth - rectLength) / 2;
+        }
+        else
+        {
+          document.getElementById('mercury-play-back').style.display = 'none';
+        }
+      }
+      else
+      {
+        if(xOffset >=150)
+        {
+          xOffset += xOffset/1.5;
+          document.getElementById('mercury-play-back').style.display = 'block';
+          document.getElementById('mercury-play-back').style.top = (rectLength/2).toString()+'px';
+          document.getElementById('mercury-play-back').style.left = (xOffset/2).toString()+'px';
+        }
+        else
+        {
+          document.getElementById('mercury-play-back').style.display = 'none';
+        }
+      }
+      
+      /*
+      if(!window.mobileCheck())
+      {
+        document.getElementById('mercury-play-back').style.fontSize = '200%';
+      }
+      */
+    }
+    
+    renderer.resize(viewportWidth, innerHeight);
+    
+  }
+  document.getElementById('bingo-loading').style.left = (xOffset + rectLength / 2).toString()+'px';
+  document.getElementById('bingo-loading').style.top = (yOffset + rectLength / 2).toString()+'px';
+
+
+  if(rectLength>=800)
+  {
+    strokeWidth = 5;
+    textStyle.fontSize = 36+fontSizeOffset;
+  }
+  else if(rectLength>=600)
+  {
+    strokeWidth = 4;
+    textStyle.fontSize = 32+fontSizeOffset;
+  }
+  else if(rectLength>=400)
+  {
+    strokeWidth = 3;
+    textStyle.fontSize = 28+fontSizeOffset;
+  }
+  else if(rectLength>=250)
+  {
+    strokeWidth = 2;
+    textStyle.fontSize = 24+fontSizeOffset;
+  }
+  else
+  {
+    strokeWidth = 1;
+    textStyle.fontSize = 20+fontSizeOffset;
+  }
+  strokeWidth=1;
+
+  graphics.clear();
+  graphics.lineStyle(strokeWidth, strokeColor, 1, 0);
+  graphics.zIndex = -1;
+  graphics.beginFill(rectColor);
+  for(let i=0;i<36;i++)
+  {
+    xLoc[i] = xOffset + (rectLength*(i%6)/6)+rectLength/12;
+    yLoc[i] = yOffset + (rectLength*parseInt(i/6)/6)+rectLength/12;
+    if(!spriteDestroyed)
+    {
+      //let i = bingoArray[k];
+      
+      spriteArray[i].x= xLoc[i];
+      spriteArray[i].y= yLoc[i];
+      spriteArray[i].width = rectLength/6 - 2*strokeWidth;
+      spriteArray[i].height = rectLength/6 - 2*strokeWidth;
+      spriteArray[i].zIndex = 0;
+    }
+    
+
+    
+    if(!itemsDestroyed)
+    {
+      if(usePreview)
+      {
+        //graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+        previewSpriteArray[i].x= xLoc[i];
+        previewSpriteArray[i].y= yLoc[i];
+        previewSpriteArray[i].width = rectLength/6 - 2*strokeWidth;
+        previewSpriteArray[i].height = rectLength/6 - 2*strokeWidth;
+        previewSpriteArray[i].zIndex = -0.8;
+        //spriteArray[i].interactive = true;
+
+      }
+      else
+      {
+        graphics.drawRect(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6), rectLength/6, rectLength/6);
+      }
+      
+
+      textArray[i].x = xLoc[i];
+      textArray[i].y = yLoc[i];
+      textArray[i].style = textStyle;
+      textArray[i].zIndex = -0.5;
+    }
+    
+
+    if(playableArray[i])
+    {
+      if(!spriteDestroyed)
+      {
+        videoArray[i].x = xOffset;
+        videoArray[i].y = yOffset;
+        videoArray[i].width = rectLength;
+        videoArray[i].height = rectLength;
+        //stage.addChild(videoArray[i]);
+        videoArray[i].texture.baseTexture.resource.source.pause();
+        //videoLoaded[i] = false;
+        videoArray[i].alpha=0;
+      }
+      
+      document.getElementById('bingo-loading').style.display = 'none';
+
+      if(useHighlight)
+      {
+        graphicsArray[i].clear();
+        graphicsArray[i].lineStyle(strokeWidth*2, highlightColor, 1, 0);
+        graphicsArray[i].beginFill(0xffffff);
+        graphicsArray[i].drawRect(xOffset + (rectLength*(i%6)/6) - strokeWidth, yOffset + (rectLength*parseInt(i/6)/6) - strokeWidth, rectLength/6 + 2 * strokeWidth, rectLength/6 + 2 * strokeWidth);
+        graphicsArray[i].zIndex = -0.5;
+        if(showArray[i]) graphicsArray[i].alpha=1; else graphicsArray[i].alpha=0;
+        graphicsArray[i].endFill();
+      }
+
+      if(playVideoInBingoBox)
+      {
+        bingoBoxVideoArray[i].x= xLoc[i];
+        bingoBoxVideoArray[i].y= yLoc[i];
+        bingoBoxVideoArray[i].width = rectLength/6 - 2*strokeWidth;
+        bingoBoxVideoArray[i].height = rectLength/6 - 2*strokeWidth;
+
+        //bingoBoxVideoArray[i].alpha = 0;
+        //bingoBoxVideoArray[i].texture.baseTexture.resource.source.pause();
+      }
+      
+    }
+    //rectArray[i].moveTo(xOffset + (rectLength*(i%6)/6), yOffset + (rectLength*parseInt(i/6)/6));
+
+    //rectArray[i].width = rectLength/6;
+    //rectArray[i].length = rectLength/6;
+    //rectArray[i].zIndex = -1;
+  }
+  graphics.endFill();
+
+  if(!spriteDestroyed)
+  {
+    if(spriteArray[0]!=null)
+    {
+      decreaseScale = spriteArray[0].scale.x;
+      let temp = spriteArray[0].width;
+      spriteArray[0].width = rectLength/6;
+      increaseScale = spriteArray[0].scale.x * 6;
+      spriteArray[0].width = temp;
+    }
+
+    for(let i=0;i<36;i++)
+    {
+      //let i = bingoArray[k];
+      //spriteArray[i].alpha = 1.0;
+
+      if(!restoreImage)
+      {
+        if(showArray[i])
+        {
+          spriteArray[i].alpha = 1.0;
+          if(useHighlight && playableArray[i]) graphicsArray[i].alpha = 1.0;
+        }
+        else
+        {
+          textArray[i].alpha = 1.0;
+          previewSpriteArray[i].alpha = previewAlpha;
+        }
+      }
+      else
+      { 
+        spriteArray[i].alpha = 0.0;
+
+        if(!playableArray[i])
+        {
+          textArray[i].visible = true;
+          previewSpriteArray[i].visible = true;
+          textArray[i].alpha = 1.0;
+          previewSpriteArray[i].alpha = previewAlpha;
+          showArray[i] = false;
+        }
+        else
+        {
+          if(showArray[i])
+          {
+
+            if(playVideoInBingoBox)
+            {
+              spriteArray[i].alpha = 0.0;
+              bingoBoxVideoArray[i].alpha = 1;
+              
+              bingoBoxVideoArray[i].texture.baseTexture.resource.source.currentTime = 0;
+              bingoBoxVideoArray[i].texture.baseTexture.resource.source.play();
+              bingoBoxVideoArray[i].texture.baseTexture.resource.source.loop = true;
+            }
+            else
+            {
+              spriteArray[i].alpha = 1.0;
+            }
+            if(useHighlight) graphicsArray[i].alpha = 1.0;
+          }
+          else
+          {
+            textArray[i].visible = true;
+            previewSpriteArray[i].visible = true;
+            textArray[i].alpha = 1.0;
+            previewSpriteArray[i].alpha = previewAlpha;
+          }
+        }
+
+      }
+
+    }
+  }
+  
+  graphics.alpha = 1.0;
+  inAnimation = false;
+  toggled = false;
+  curImage = null;
+
+  if(selectedImage!=null&&!spriteDestroyed)
+  {
+    let k = selectedImage.num;
+    // IF PLAYABLE, STOP AND HIDE
+    if(playableArray[k])
+    {
+      videoArray[k].alpha = 0;
+      //stage.removeChild(videoArray[k]);
+      if(isDebug) console.log('video Paused');
+      videoArray[k].texture.baseTexture.resource.source.pause();
+      //videoLoaded = false;
+      //console.log('remove video');
+      document.getElementById('bingo-loading').style.display = 'none';
+    }
+  }
+  
+
+  if(!animateMode)
+  {
+    renderer.render(stage);
+  }
+
+  if(isDebug)
+  {
+    console.log('rectLength: '+ rectLength);
+  }
+  if(!bingoMatched)
+    console.log('checkBingo: '+checkBingo());
+
+  if(threejsRenderer != null)
+  {
+    threejsResize();
+  }
+  
+}
+
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+const ticker = new PIXI.Ticker();
+ticker.add(animate);
+ticker.start();
+
+function animate() {
+  
+  if(!bingoMatched)
+  {
+    // INCREASE IMAGE
+    if(selectedImage!=null&&deltaScale>0&&currentMovementFrame<increaseMovementFrames)
+    {
+      let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/increaseMovementFrames);
+      selectedImage.scale.x = deltaScale * coeff + decreaseScale;
+      selectedImage.scale.y = deltaScale * coeff + decreaseScale;
+      //selectedImage.scale.x += deltaScale;
+      //selectedImage.scale.y += deltaScale;
+      selectedImage.x = deltaPosX * coeff + originX;
+      selectedImage.y = deltaPosY * coeff + originY;
+      //selectedImage.x += deltaPosX;
+      //selectedImage.y += deltaPosY;
+      for(let i=0;i<36;i++)
+      {
+        //let i = bingoArray[k];
+        if(showArray[i])
+        {
+          //spriteArray[i].alpha += deltaAlpha;
+          if(playVideoInBingoBox&&playableArray[i])
+          {
+            spriteArray[i].alpha = 0;
+            bingoBoxVideoArray[i].alpha = (0-1) * coeff + 1;
+          }
+          else
+          {
+            spriteArray[i].alpha = (0-1) * coeff + 1;
+          }
+          spriteArray[i].alpha = (0-1) * coeff + 1;
+          if(useHighlight && playableArray[i]) graphicsArray[i].alpha = (0-1) * coeff + 1;
+        }
+        else
+        {
+          //textArray[i].alpha += deltaAlpha;
+          textArray[i].alpha = (0-1) * coeff + 1;
+          previewSpriteArray[i].alpha = (0-previewAlpha) * coeff + previewAlpha;
+        }
+      }
+      graphics.alpha = (0-1) * coeff + 1;
+      selectedImage.alpha = 1.0;
+      currentMovementFrame++;
+    }
+
+    // DECREASE IMAGE
+    if(selectedImage!=null&&deltaScale<0&&currentMovementFrame<decreaseMovementFrames)
+    {
+      let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/decreaseMovementFrames);
+      selectedImage.scale.x = deltaScale * coeff + increaseScale;
+      selectedImage.scale.y = deltaScale * coeff + increaseScale;
+      //selectedImage.scale.x += deltaScale;
+      //selectedImage.scale.y += deltaScale;
+      selectedImage.x = deltaPosX * coeff + originX;
+      selectedImage.y = deltaPosY * coeff + originY;
+      //selectedImage.x += deltaPosX;
+      //selectedImage.y += deltaPosY;
+      for(let i=0;i<36;i++)
+      {
+        //let i = bingoArray[k];
+        if(showArray[i])
+        {
+          //spriteArray[i].alpha += deltaAlpha;
+          if(playVideoInBingoBox&&playableArray[i])
+          {
+            spriteArray[i].alpha = 0;
+            bingoBoxVideoArray[i].alpha = (1-0) * coeff;
+          }
+          else
+          {
+            spriteArray[i].alpha = (1-0) * coeff;
+          }
+          if(useHighlight && playableArray[i]) graphicsArray[i].alpha = (1-0) * coeff;
+        }
+        else
+        {
+          //textArray[i].alpha += deltaAlpha;
+          textArray[i].alpha = (1-0) * coeff;
+          previewSpriteArray[i].alpha = (previewAlpha-0) * coeff;
+        }
+      }
+      graphics.alpha = (1-0) * coeff;
+      selectedImage.alpha = 1.0;
+      currentMovementFrame++;
+    }
+
+    // INCREASE DONE AND STOP
+    if(selectedImage!=null&&deltaScale>0&&currentMovementFrame>=increaseMovementFrames)
+    {
+      currentMovementFrame = 0;
+      deltaScale = 0;
+      selectedImage.scale.x = increaseScale;
+      selectedImage.scale.y = increaseScale;
+      selectedImage.x = xOffset + rectLength/2;
+      selectedImage.y = yOffset + rectLength/2;
+      for(let i=0;i<36;i++)
+      {
+        //let i = bingoArray[k];
+        if(showArray[i])
+        {
+          spriteArray[i].alpha = 0;
+          if(useHighlight && playableArray[i]) graphicsArray[i].alpha = 0;
+        }
+        else
+        {
+          textArray[i].alpha = 0;
+          previewSpriteArray[i].alpha = 0;
+        }
+      }
+      graphics.alpha = 0;
+      selectedImage.alpha = 1.0;
+      inAnimation = false;
+      toggled = true;
+      if(pendingResize)
+      {
+        pendingResize = false;
+        resize();
+      }
+
+      // TODO
+      // IF PLAYABLE, SHOW AND PLAY VIDEO
+      let k = selectedImage.num;
+      if(playableArray[k])
+      {
+        videoArray[k].alpha = 1;
+        //stage.addChild(videoArray[k]);
+        videoArray[k].texture.baseTexture.resource.source.currentTime = 0;
+        videoArray[k].texture.baseTexture.resource.source.play();
+        videoArray[k].texture.baseTexture.resource.source.loop = false;
+        curVideo =  videoArray[k].texture.baseTexture.resource.source;
+        if(isDebug) console.log(curVideo);
+        
+        //console.log(videoArray[k].texture.baseTexture.resource.source);
+        
+        if(!videoLoaded[k])
+        {
+          //console.log('video is still loading');
+          document.getElementById('bingo-loading').style.display = 'block';
+        }
+        else
+        {
+          document.getElementById('bingo-loading').style.display = 'none';
+        }
+      }
+      
+    }
+
+    // DECREASE DONE AND STOP
+    if(selectedImage!=null&&deltaScale<0&&currentMovementFrame>=decreaseMovementFrames)
+    {
+      currentMovementFrame = 0;
+      deltaScale = 0;
+      selectedImage.scale.x = decreaseScale;
+      selectedImage.scale.y = decreaseScale;
+      selectedImage.x = beforeX;
+      selectedImage.y = beforeY;
+      for(let i=0;i<36;i++)
+      {
+        //let i = bingoArray[k];
+
+        if(!restoreImage)
+        {
+          if(showArray[i])
+          {
+            
+            if(playVideoInBingoBox&&playableArray[i])
+            {
+              bingoBoxVideoArray[i].alpha = 1.0;
+            }
+            else
+            {
+              spriteArray[i].alpha = 1.0;
+            }
+            if(useHighlight && playableArray[i]) graphicsArray[i].alpha = 1.0;
+          }
+          else
+          {
+            textArray[i].alpha = 1.0;
+            previewSpriteArray[i].alpha = previewAlpha;
+          }
+        }
+        else
+        { 
+          spriteArray[i].alpha = 0.0;
+
+          if(!playableArray[i])
+          {
+            textArray[i].visible = true;
+            previewSpriteArray[i].visible = true;
+            textArray[i].alpha = 1.0;
+            previewSpriteArray[i].alpha = previewAlpha;
+            showArray[i] = false;
+          }
+          else
+          {
+            if(showArray[i])
+            {
+              
+
+              if(playVideoInBingoBox)
+              {
+                spriteArray[i].alpha = 0.0;
+                bingoBoxVideoArray[i].alpha = 1;
+                
+                bingoBoxVideoArray[i].texture.baseTexture.resource.source.currentTime = 0;
+                bingoBoxVideoArray[i].texture.baseTexture.resource.source.play();
+                bingoBoxVideoArray[i].texture.baseTexture.resource.source.loop = true;
+              }
+              else
+              {
+                spriteArray[i].alpha = 1.0;
+              }
+
+              if(useHighlight) graphicsArray[i].alpha = 1.0;
+            }
+            else
+            {
+              textArray[i].visible = true;
+              previewSpriteArray[i].visible = true;
+              textArray[i].alpha = 1.0;
+              previewSpriteArray[i].alpha = previewAlpha;
+            }
+          }
+
+        }
+
+
+
+
+        
+      }
+      graphics.alpha = 1.0;
+      inAnimation = false;
+      toggled = false;
+      if(pendingResize)
+      {
+        pendingResize = false;
+        resize();
+      }
+      console.log('checkBingo: '+checkBingo());
+    }
+
+    if(curImage && !curVideo &&selectedImage!=null&&shakyFrame<=shakyMaxFrames&&deltaScale == 0)
+    {
+      let translatePower = 1;
+      let rotationPower = 1;
+      if(shakyFrame == 0)
+      {
+        selectedImage.x +=1 * translatePower;
+        selectedImage.y +=1 * translatePower;
+        selectedImage.angle += 0 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 1)
+      {
+        selectedImage.x -=1 * translatePower;
+        selectedImage.y -=2 * translatePower;
+        selectedImage.angle -= 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 2)
+      {
+        selectedImage.x -=3 * translatePower;
+        selectedImage.y +=0 * translatePower;
+        selectedImage.angle += 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 3)
+      {
+        selectedImage.x +=3 * translatePower;
+        selectedImage.y +=2 * translatePower;
+        selectedImage.angle += 0 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 4)
+      {
+        selectedImage.x +=1 * translatePower;
+        selectedImage.y -=1 * translatePower;
+        selectedImage.angle += 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 5)
+      {
+        selectedImage.x -=1 * translatePower;
+        selectedImage.y +=2 * translatePower;
+        selectedImage.angle -= 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 6)
+      {
+        selectedImage.x -=3 * translatePower;
+        selectedImage.y +=1 * translatePower;
+        selectedImage.angle += 0 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 7)
+      {
+        selectedImage.x +=3 * translatePower;
+        selectedImage.y +=1 * translatePower;
+        selectedImage.angle -= 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 8)
+      {
+        selectedImage.x -=1 * translatePower;
+        selectedImage.y -=1 * translatePower;
+        selectedImage.angle += 1 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 9)
+      {
+        selectedImage.x +=1 * translatePower;
+        selectedImage.y +=2 * translatePower;
+        selectedImage.angle += 0 * rotationPower;
+      }
+      else if(shakyFrame == shakyMaxFrames/10 * 10)
+      {
+        selectedImage.x +=1 * translatePower;
+        selectedImage.y -=2 * translatePower;
+        selectedImage.angle -= 0 * rotationPower;
+      }
+      
+      shakyFrame++;
+      if(shakyFrame==shakyMaxFrames)
+      {
+        //console.log('shaky Done');
+
+
+
+        //when image is toggled(selected) and size is maximized
+        //minimize size
+        //let k = curImage.num;
+        // TODO
+        // IF PLAYABLE, STOP AND HIDE
+
+        //this.x = beforeX;
+        //this.y = beforeY;
+        //this.scale.x /= 6;
+        //this.scale.y /= 6;
+        curImage.zIndex = 0;
+        /*
+        deltaScale = (decreaseScale - increaseScale) / decreaseMovementFrames;
+        deltaPosX = (beforeX - this.x) / decreaseMovementFrames;
+        deltaPosY = (beforeY - this.y) / decreaseMovementFrames;
+        */
+        deltaScale = (decreaseScale - increaseScale);
+        originX = curImage.x;
+        originY = curImage.y;
+        deltaPosX = (beforeX - curImage.x);
+        deltaPosY = (beforeY - curImage.y);
+        deltaAlpha = 1.0 / decreaseMovementFrames;
+        inAnimation = true;
+        currentMovementFrame = 0;
+        shakyFrame = 0;
+        curImage.angle = 0;
+        
+
+        curVideo = null;
+        curImage = null;
+
+        if(pendingResize)
+        {
+          pendingResize = false;
+          resize();
+        }
+
+      }
+    }
+
+    
+
+    if(curImage && curVideo && curVideo.currentTime >= curVideo.duration-0.001)
+    {
+      //console.log(curVideo.currentTime);
+      //console.log('duration '+curVideo.duration)
+
+
+      //when image is toggled(selected) and size is maximized
+      //minimize size
+      let k = curImage.num;
+      // TODO
+      // IF PLAYABLE, STOP AND HIDE
+      if(playableArray[k])
+      {
+        videoArray[k].alpha = 0;
+        if(isDebug) console.log('video Paused');
+        //stage.removeChild(videoArray[k]);
+        videoArray[k].texture.baseTexture.resource.source.pause();
+        //videoLoaded = false;
+        document.getElementById('bingo-loading').style.display = 'none';
+      }
+
+      //this.x = beforeX;
+      //this.y = beforeY;
+      //this.scale.x /= 6;
+      //this.scale.y /= 6;
+      curImage.zIndex = 0;
+      /*
+      deltaScale = (decreaseScale - increaseScale) / decreaseMovementFrames;
+      deltaPosX = (beforeX - this.x) / decreaseMovementFrames;
+      deltaPosY = (beforeY - this.y) / decreaseMovementFrames;
+      */
+      deltaScale = (decreaseScale - increaseScale);
+      originX = curImage.x;
+      originY = curImage.y;
+      deltaPosX = (beforeX - curImage.x);
+      deltaPosY = (beforeY - curImage.y);
+      deltaAlpha = 1.0 / decreaseMovementFrames;
+      inAnimation = true;
+      currentMovementFrame = 0;
+      shakyFrame = 0;
+
+      curVideo = null;
+      curImage = null;
+
+    }
+  }
+  else if(endPhase == 0)//if bingoMatched
+  {
+    if(currentMovementFrame<bingoFadeOutFrames)
+    {
+      let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/bingoFadeOutFrames);
+
+      for(let i=0;i<36;i++)
+      {
+        if(playableArray[i])
+        {
+          previewSpriteArray[i].alpha = 0;
+          textArray[i].alpha =0;
+        }
+        else
+        {
+          previewSpriteArray[i].alpha = (0-previewAlpha) * coeff + previewAlpha;
+          textArray[i].alpha = (0-1) * coeff + 1;
+          
+        }
+        
+      }
+      currentMovementFrame++;
+    }
+    else
+    {
+      if(!itemsDestroyed)
+      {
+        itemsDestroyed = true;
+        destroyAll();
+        
+      }
+      threejsInit();
+      requestAnimationFrame(render);
+      endPhase = 1;
+      currentMovementFrame = 0;
+      
+    }
+
+  }
+  else if(endPhase == 1)
+  {
+    if(threejsRenderer)
+    {
+      if(currentMovementFrame<radioFadeInFrames)
+      {
+        let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/radioFadeInFrames);
+
+        document.getElementById('threejs-background').style.opacity = coeff;
+        currentMovementFrame++;
+      }
+      else
+      {
+        endPhase = 2;
+        currentMovementFrame = 0;
+      }
+    }
+    
+  }
+  else if(endPhase == 2)
+  {
+    if(threejsRenderer)
+    {
+      if(currentMovementFrame<waitRedirectFrames)
+      {
+        let coeff = Math.sin(Math.PI/2.0*currentMovementFrame/waitRedirectFrames);
+
+        //document.getElementById('threejs-background').style.opacity = coeff;
+        currentMovementFrame++;
+      }
+      else
+      {
+        endPhase = 3;
+        currentMovementFrame = 0;
+        redirect();
+      }
+    }
+    
+  }
+  
+
+  renderer.render(stage);
+  if(animateMode)
+  {
+    requestAnimationFrame(animate);
+  }
+  
+}
+
+
+function checkBingo() {
+  let isBingo = true;
+  for(let i =0;i<36;i++)
+  {
+    if(playableArray[i])
+    {
+      if(!showArray[i])
+      {
+        isBingo = false;
+        return isBingo;
+      }
+    }
+  }
+  if(isBingo)
+  {
+    bingoMatched = true;
+    currentMovementFrame = 0;
+    stage.removeChild(graphics);
+    spriteDestroyed = true;
+    for(let i=0;i<36;i++)
+    {
+      stage.removeChild(spriteArray[i]);
+      stage.removeChild(videoArray[i]);
+      spriteArray[i].destroy({ options: true });
+      if(videoArray[i])videoArray[i].destroy({ options: true });
+    }
+
+
+  }
+  return isBingo;
+}
+
+
+function destroyAll() {
+  for(let i=0;i<36;i++)
+  {
+    stage.removeChild(previewSpriteArray[i]);
+    stage.removeChild(textArray[i]);
+    textArray[i].destroy({ options: true });
+    previewSpriteArray[i].destroy({ options: true });
+  }
+  //redirect();
+
+  
+}
+
+$('#info-alert').on('close.bs.alert', function () {
+  // do something...
+  document.getElementById('bingo').style.pointerEvents = 'auto';
+})
+
+function redirect() {
+  window.location.replace("https://encyclopedia.osisun.ch");
+}
+
+
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+/*--------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+
+
+// Camera Setting
+{
+  var camPosX = 0; // -x to x is left to right
+  var camPosY = 0; // y is camera up and down
+  var camPosZ = 4; // +z farther from origin, -z into the origin
+  var fov = 30;
+  var aspect = window.innerWidth / window.innerHeight;
+  var near = 0.25;
+  var far = 20;
+}
+var useControls = true;
+
+
+
+
+
+
+function threejsInit() {
+
+  container = document.querySelector('#threejs-background');
+  //resizeContent();
+
+  if(showStats)
+  {
+    stats = new Stats();
+    stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+    document.body.appendChild( stats.dom );
+  }
+
+  scene = new THREE.Scene();
+
+  {
+    
+    aspect = window.innerWidth / window.innerHeight;
+    camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
+    camera.position.set(camPosX, camPosY, camPosZ);
+    camera.updateProjectionMatrix();
+
+  }
+
+  new RGBELoader()
+    .setDataType( THREE.UnsignedByteType )
+    .load( 'encyclopedia/royal_esplanade_1k.hdr', function ( texture ) {
+
+      var envMap = pmremGenerator.fromEquirectangular( texture ).texture;
+
+      scene.environment = envMap;
+      
+      texture.dispose();
+      pmremGenerator.dispose();
+      if(isDebug) console.log('hdr loaded');
+      var gltfLoader = new GLTFLoader();
+
+      gltfLoader.load( 'encyclopedia/resource/2.gltf', function ( gltf ) {
+        gltf.scene.traverse( function ( child ) {
+          if ( child.isMesh ) {
+            // TOFIX RoughnessMipmapper seems to be broken with WebGL 2.0
+            // roughnessMipmapper.generateMipmaps( child.material );
+          }
+        } );
+
+        var objScale = 5;
+        gltf.scene.children[0].scale.x = objScale;
+        gltf.scene.children[0].scale.y = objScale;
+        gltf.scene.children[0].scale.z = objScale;
+        gltf.scene.rotation.z = -0.1;
+
+        scene.add( gltf.scene );
+        mercuryObject=gltf.scene.children[0];
+        mercuryObject.parent.position.x = -0.3;
+        if(window.innerHeight>window.innerWidth)
+          mercuryObject.parent.position.y = -0.2;
+        else
+          mercuryObject.parent.position.y = 0;
+
+        if(isDebug) console.log(mercuryObject);
+
+        } );
+
+  });
+
+  {
+    threejsRenderer = new THREE.WebGLRenderer( { antialias: true, alpha: true } );
+    threejsRenderer.setPixelRatio( window.devicePixelRatio );
+    threejsRenderer.setSize( window.innerWidth, window.innerHeight );
+    threejsRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+    threejsRenderer.toneMappingExposure = 1;
+    threejsRenderer.outputEncoding = THREE.sRGBEncoding;
+    threejsElement = container.appendChild( threejsRenderer.domElement );
+    /*
+    renderer.domElement.style.position = 'fixed';
+    renderer.domElement.style.left = '0px';
+    renderer.domElement.style.top = '0px';
+    renderer.domElement.style.zIndex = '-1';
+    */
+    var pmremGenerator = new THREE.PMREMGenerator( threejsRenderer );
+    pmremGenerator.compileEquirectangularShader();
+  }
+
+  // ORBIT CONTROLS
+  if(useControls)
+  {
+    controls = new OrbitControls( camera, threejsRenderer.domElement );
+    //controls.addEventListener( 'change', render ); // use if there is no animation loop
+    //controls.minDistance = 2;
+    controls.minDistance = 6;
+    //controls.maxDistance = 10;
+    if(isDebug)
+    {
+      controls.maxDistance = 20;
+    }
+    else
+    {
+      controls.maxDistance = 11;
+    }
+    
+    controls.mouseButtons = {
+      // LEFT: THREE.MOUSE.ROTATE,
+      // MIDDLE: THREE.MOUSE.DOLLY,
+      // RIGHT: THREE.MOUSE.PAN
+      LEFT: THREE.MOUSE.PAN,
+      MIDDLE: THREE.MOUSE.DOLLY
+    };
+    controls.touches = {
+      // ONE: THREE.TOUCH.ROTATE,
+      // TWO: THREE.TOUCH.DOLLY_PAN
+      ONE: THREE.TOUCH.DOLLY_PAN,
+      TWO: THREE.TOUCH.DOLLY_PAN
+    };
+    controls.enablePan = true;
+    controls.enableZoom = true;
+    controls.enableRotate = true;
+    controls.target.set( 0, 0, - 0.2 );
+    var minPan = new THREE.Vector3( - 2, -1, -0.2 );
+    var maxPan = new THREE.Vector3( 2, 1, -0.2 );
+    var _v = new THREE.Vector3();
+    
+    controls.addEventListener("change", function() {
+        _v.copy(controls.target);
+        controls.target.clamp(minPan, maxPan);
+        _v.sub(controls.target);
+        camera.position.sub(_v);
+        //console.log(controls.position0.z);
+    })
+
+    //createLimitPan({camera, controls, THREE});
+    controls.update();
+  }
+}
+
+function threejsResize() {
+  console.log('Threejs canvas is resized.')
+ 
+  let windowAspect = window.innerWidth / window.innerHeight;
+  camera.aspect = windowAspect;
+  camera.updateProjectionMatrix();
+
+  threejsRenderer.setSize( window.innerWidth, window.innerHeight );
+
+}
+
+
+function render(time) {
+
+  if(showStats) stats.begin();
+
+  time *= 0.001; 
+
+  try {
+    mercuryObject.rotation.y = 1.2 * time * 0.5 + 2.0;
+    
+    
+
+  } catch (e) {
+      if (e instanceof TypeError) {
+          //printError(e, true);
+          console.log('Waiting object to be created');
+      } else {
+          //printError(e, false);
+          console.log(e);
+      }
+  }
+
+  threejsRenderer.render( scene, camera );
+
+  if(showStats) stats.end();
+
+  requestAnimationFrame(render);
+
+}
